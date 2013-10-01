@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        //function fireRequest() {
+        //    $.ajax("http://wkhmrbizsrvfd01.na.wkglobal.com/SearchService.svc/AutoComplete/?term=bloo")
+        //  .done(function () {
+        //      alert("success");
+        //  })
+        //  .fail(function () {
+        //      alert("error");
+        //  })
+        //  .always(function () {
+        //      alert("complete");
+        //  });
+        //}
+
+        $(document).ready(function () {
+            var url = "http://localhost/wcf/SearchService.svc/AutoComplete/?term=bloo";
+            $.getJSON(url + "?callback=?", null, function (tweets) {
+                console.log(tweets);
+                for (i in tweets) {
+                    //console.log(i);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" value="go"  />
+</body>
+</html>
