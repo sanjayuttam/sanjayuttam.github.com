@@ -1,4 +1,404 @@
-﻿<?xml version="1.0" encoding="utf-8"?><rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sanjay Uttam's Blog</title><link>http://www.sanjayuttam.com/feed.xml</link><description>Sanjay Uttam's Blog</description><item><guid isPermaLink="false">http://www.SanjayUttam.com/2013/11/new-everything/</guid><link>http://www.sanjayuttam.com/2013/11/new-everything/</link><title>New Domain, New Platform, New Host</title><description>&lt;p&gt;Well...I finally got around to tweaking my blog, and in theory that will mean I actually get to writing a bit more.  This instance of my blog is running on &lt;a href="https://github.com/Sandra/Sandra.Snow/" target="_blank"&gt;Sandra Snow&lt;/a&gt;.  It's basically a port of &lt;a href="https://github.com/mojombo/jekyll" target="_blank"&gt;Jekyll&lt;/a&gt; with some additional features, and of course running on .NET (&lt;a href="https://github.com/NancyFx/Nancy" target="_blank"&gt;NancyFx&lt;/a&gt;) rather than Ruby.  The way both of these work is pretty much the same..&lt;/p&gt;
+﻿<?xml version="1.0" encoding="utf-8"?><rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sanjay Uttam's Blog</title><link>http://www.sanjayuttam.com/feed.xml</link><description>Sanjay Uttam's Blog</description><item><guid isPermaLink="false">http://www.SanjayUttam.com/2013/11/graphconnect-nyc/</guid><link>http://www.sanjayuttam.com/2013/11/graphconnect-nyc/</link><title>#GraphConnect NYC Coverage</title><description>&lt;p&gt;Last week I attended the NYC Neo4j Meetup on Data Modeling &amp;amp; Natural Language Search, even better, I happened to win tickets to GraphConnect NYC which was just a few days later.  I decided to compile some notes from the event, but rather than just bullet-pointing out the content, I decided to compile a brief synopsis of each of the forums I attended so you know which slides to review or video to check out first.  This should be a pretty decent place to start if you're just looking to get your bearings when it comes to Graph DBs and Neo4j.  There are also a bunch of videos available at &lt;a href="http://watch.neo4j.org/" target="_blank"&gt;http://watch.neo4j.org/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr/&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;New Opportunities for Connected Data&lt;/span&gt;
+&lt;em&gt;Emil Eifrem / &lt;a target="_blank" href="http://watch.neo4j.org/video/69627080"&gt;Presentation (Video)&lt;/a&gt; / &lt;a  target="_blank" href="http://www.slideshare.net/jaxlondon2012/new-opportunities-for-connected-data-ian-robinson"&gt;Presentation (Slides)&lt;/a&gt; / &lt;a  target="_blank" href="https://twitter.com/emileifrem"&gt;@emileifrem&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Intro/GraphDBs and Data Complexity&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Adoption rates of graph data-bases continue to increase, with telecom, financial services, and web/ISV-firms driving the bulk of growth.  This is primarily due to the evolution of data and data connectedness (Note: coming from a relational database model, you can think of connectedness as a data-model with lots of joins).  Although graph databases and graph modeling can seem intimidating, it's actually a very natural way to model the real-world.&lt;/p&gt;
+
+&lt;p&gt;For example, compare the complexity of answering the below questions in their respective domains in a relational DB versus a graph DB.&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+&lt;li&gt;Subway or Transit Systems: "How do I get from point A to point B?"&lt;/li&gt;
+
+&lt;li&gt;Data-Centers or Networks: "If switch X goes down, what systems are impacted?"&lt;/li&gt;
+
+&lt;li&gt;Recommendation Engines: "What did customers who bought this product also buy?"&lt;/li&gt;
+
+&lt;li&gt;Social Networks: "How many of my friends know person X?"&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These can certainly be modeled in a relational world, and the questions answered using appropriate algorithms but all of that extra work becomes unnecessary if you use a graph DB instead.  Adoption rates seem to indicate this assessment is correct, especially in products where determining correlations and causality is a key feature. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Graph DBs, Features and Benefits&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to being intuitive and natural to model, graph DBs also provide the advantage of providing constant query times even as the data-set grows.  That is, you are only paying the traversal of nodes (compare to outer joining on a large table).  Additionally, since graph DBs are have non-rigid structures, it is easier to evolve the structure of a graph DB when compared to a relational DB.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Querying a Graph DB&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A graph consists of nodes (entities) and vertices (lines to other nodes).  Each of these vertices can be labeled with a relationship descriptor.  Additionally, each node can have N number of properties.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://www.neo4j.org/learn/cypher" target="_blank"&gt;Cypher&lt;/a&gt; is the language Neo4j provides to describe and query the graph. Cypher queries can provide the engine the following data:&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+&lt;li&gt;A starting node&lt;/li&gt;
+
+&lt;li&gt;What relationships to traverse&lt;/li&gt;
+
+&lt;li&gt;What data to return&lt;/li&gt;
+
+&lt;li&gt;What property values to match&lt;/li&gt;
+
+&lt;li&gt;How to order the data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;Designing and Building a Graph Database Application&lt;/span&gt;
+&lt;em&gt;Ian Robinson / &lt;a target="_blank" href="http://vimeo.com/76710631"&gt;Presentation (Video)&lt;/a&gt; / &lt;a target="_blank" href="http://iansrobinson.com/"&gt;Blog&lt;/a&gt; / &lt;a target="_blank" href="https://github.com/iansrobinson"&gt;GitHub&lt;/a&gt; / &lt;a target="_blank"  href="https://twitter.com/iansrobinson"&gt;@IansRobinson&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Not unlike the relational world, it's critical to model data correctly when building an application that is backed by a graph DB.  It's helpful to know the questions you are going to ask of your data when you are building your data-model.&lt;/p&gt;
+
+&lt;p&gt;Given a system that is used for knowledge management and exploring one's professional social network, a typical question asked of the system might be &amp;#34;Which people who work for the same company have the same skills as I do?&amp;#34;&lt;/p&gt;
+
+&lt;p&gt;Start by:&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+&lt;li&gt;Identifying entities (People, Companies, Skills)&lt;/li&gt;
+
+&lt;li&gt;Identifying relationships (A person WORKS_FOR a company, a person HAS_SKILL)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Convert these relationships and entities into cypher, and examine how easy (or difficult) it is to answer your sample question(s).  It may also be helpful to create a sample graph and ask the question(s) with the graph model in front of you (See slide 14).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Testing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tests should be similar to tests that you'd have in an application with a relational store.  In addition, you should be able to test that your data model is sufficient/adequate, as well as be able to ensure the queries you designed return the correct data.  Of course, these tests also serve the purpose of documentation and act as regression tests.&lt;/p&gt;
+
+&lt;p&gt;In Java, there is an entirely in-memory version of Neo4j that should only be used for testing.  This engine can be injected via dependency injection (as you would do with other dependencies). In doing so, you should also include a small, static data-set.  This should provide you the ability to easily execute your queries with full knowledge of what the correct response should be.  The exact strategy (how this gets injected, etc.) will depend on your architecture.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Neo4j Application/Platform Choices&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Neo4j has 3 options as far as how it can be installed/leveraged.&lt;/p&gt;
+
+&lt;ol class="style1"&gt;
+&lt;li&gt;Embedded&lt;/li&gt;
+
+&lt;ul class="style1"&gt; 
+    &lt;li&gt;Hosted in a Java process&lt;/li&gt;
+
+    &lt;li&gt;Provides native access to the Neo4j Java API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;li&gt;Server&lt;/li&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Wraps the embedded instance&lt;/li&gt;
+
+    &lt;li&gt;Provides a JSON REST interface&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;li&gt;Server with Extensions&lt;/li&gt;
+
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Provides a way to execute custom [Java] code on the server&lt;/li&gt;
+
+    &lt;li&gt;Provides you with a hook to control the HTTP request and response format&lt;/li&gt;
+
+    &lt;li&gt;Basically, provides a hook where into the HTTP pipeline (if you request &amp;#34;/get_skills/&amp;#34; handle it like this...)&lt;/li&gt;
+
+&lt;/ul&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There are specific code examples for writing unit tests of embedded code as well as Server Extensions starting at slide 30 of Ian's presentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;How Marvel Comics Uses Graph Databases&lt;/span&gt;
+&lt;em&gt;Peter Olson / &lt;a target="_blank" href="https://twitter.com/iansrobinson"&gt;Presentation (Video)&lt;/a&gt; / &lt;a target="_blank" href="https://twitter.com/Dethtron5000"&gt;@Dethtron5000&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Marvel has a significant inventory of stories, sprawling storylines, authors, and characters.  Additionally, stories from the marvel Universe don't obey the rules that we are likely used to modeling.  For example, characters can have a property for attribute for a very limited time, die and come back to life, exist in multiple places at once...there are basically no rules, whatsoever.  This would be a relational modeling nightmare.&lt;/p&gt;
+
+&lt;p&gt;Graph DBs are being used to solve a number of challenges associated with this universe.  For example, given this scenario: &amp;#34;A character is a superhero at a time T, which occurs in issue I.  This character is also related to an overarching theme in the Marvel history, and is part of a team.&amp;#34;&lt;/p&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;Creating Interactive Graph Visualizations&lt;/span&gt;
+&lt;em&gt;Corey Lanum / &lt;a target="_blank" href="http://watch.neo4j.org/video/64827612"&gt;Presentation (Video)&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The purpose of a visualization is to provide the user with a better understanding of the structure and relationships of the data. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;    Visualizing Nodes: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Use images and icons (as opposed to just circles with words in them)&lt;/li&gt;
+
+    &lt;li&gt;Use colors and/or gradients (gradients can be useful in expressing a numeric value, but don't get too fancy or combine colors and expect the user to know what you are expressing)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Visualizing Vertices: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Use colors to indicate categories of relationships&lt;/li&gt;
+
+    &lt;li&gt;Use width to indicate strength of a connection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Interactivity with the Graph: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;It is important to allow the user to easily add and remove filters&lt;/li&gt;
+
+    &lt;li&gt;Provide an easy way to combine qualities and aggregate them under a node&lt;/li&gt;
+
+    &lt;li&gt;Animation: If you are going to animate, make sure you do it in a way that does not cause the user to lose track of individual nodes (Note, out of the box D3 does not smoothly animate)&lt;/li&gt;
+
+    &lt;li&gt;Layout: Don't force the user into the layout you think is best for the data.  The user might be looking for something you were not looking for when you designed the application.  Provide multiple layouts for the same data-set.&lt;/li&gt;
+
+    &lt;li&gt;Explore: One of the biggest advantages of graph DBs is the ability to discover correlations and causality you did not intend n finding.  It is important you design visualizations with this in mind.  This also means you don't need to show all the data you have at once, because it may not all be relevant.  You can work around this by aggregating data under a node (think, "click to expand").  Aggregations can be done by grouping on common node properties, for example.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Visual Dangers&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Uniqueness:  Not every relationship is useful (Why do all nodes tie back to one node? This can cause a lot of noise on a graph visualization and provides little to no value most of the time)&lt;/li&gt;
+
+    &lt;li&gt;Structural Rigidity:  Don't assume that how you store your data is how users want to analyze/explore/think about the data.&lt;/li&gt;
+
+    &lt;li&gt;Don't overwhelm the user with data&lt;/li&gt;
+
+    &lt;li&gt;Don't try and be too clever. Make everything intuitive.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Common Mistakes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Using 3D (causes occlusion problems, is hard to navigate, hard to print)&lt;/li&gt;
+
+    &lt;li&gt;Bad color choices&lt;/li&gt;
+
+    &lt;li&gt;No labels (What does this vertex actually mean?)&lt;/li&gt;
+
+    &lt;li&gt;No legend&lt;/li&gt;
+
+    &lt;li&gt;No tooltips on hover&lt;/li&gt;
+
+    &lt;li&gt;Complexity (Not providing filtering)&lt;/li&gt;
+
+    &lt;li&gt;No emphasis on important nodes&lt;/li&gt;
+
+    &lt;li&gt;Black backgrounds&lt;/li&gt;
+
+    &lt;li&gt;Bad navigation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;Natural Language Search with Neo4j&lt;/span&gt;
+&lt;em&gt;Kenny Bastani / &lt;a target="_blank" href="http://www.slideshare.net/KennyBastani/natural-language-search-using-neo4j"&gt;Presentation (Slides)&lt;/a&gt; / &lt;a target="_blank" href="https://github.com/kbastani"&gt;GitHub&lt;/a&gt; / &lt;a target="_blank" href="https://twitter.com/kennybastani"&gt;@KennyBastani&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In terms of a graph DB, you can search by simply traversing paths, matching all of the paths that are &amp;#34;matches&amp;#34; (based on any criteria), and returning the matches.  Note, unlike a relational store, you are only paying the cost of the traversal (number of total nodes has little to no impact).&lt;/p&gt;
+
+&lt;p&gt;It is also possible (and useful) to model time in a graph DB.  Rather than modeling specific times and dates, Kenny explains that depending ont eh task at hand, it might be easier to model moments or snapshots in time.  See &lt;a href="http://gist.neo4j.org/?github-kbastani%2Fgists%2F%2Fmeta%2FTimeScaleEventMetaModel.adoc" target="_blank"&gt;this graph gist&lt;/a&gt; for more details, but essentially modeling&lt;/p&gt;
+
+&lt;blockquote&gt;
+    T0 &gt; T1 &gt; T2
+&lt;/blockquote&gt;
+
+&lt;p&gt;...is helpful in the context of natural language search (or search in general) because you can model out things like:&lt;/p&gt;
+
+&lt;blockquote&gt;
+At T0, Pam viewed Product X.  At T1, Pam viewed Product Y.  At T2, Pam purchased product X.
+&lt;/blockquote&gt;
+
+&lt;p&gt;With a larger sample set, it is possible to make useful deductions on this data.  For example, suggesting people who are viewing product Y to take a look at Product X.  Kenny suggests storing all these path traversals in non-real time, storing them in a JSON-friendly store, and then at runtime, extracting the relevant traversals based on some action (e.g., &lt;em&gt;Viewing product Y&lt;/em&gt;).  Note, Extrapolating path traversals can be compute intensive, you may want to distribute &amp;amp; map-reduce&lt;/p&gt;
+</description><pubDate>Fri, 15 Nov 2013 05:00:00 Z</pubDate><a10:updated>2013-11-15T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;Last week I attended the NYC Neo4j Meetup on Data Modeling &amp;amp; Natural Language Search, even better, I happened to win tickets to GraphConnect NYC which was just a few days later.  I decided to compile some notes from the event, but rather than just bullet-pointing out the content, I decided to compile a brief synopsis of each of the forums I attended so you know which slides to review or video to check out first.  This should be a pretty decent place to start if you're just looking to get your bearings when it comes to Graph DBs and Neo4j.  There are also a bunch of videos available at &lt;a href="http://watch.neo4j.org/" target="_blank"&gt;http://watch.neo4j.org/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr/&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;New Opportunities for Connected Data&lt;/span&gt;
+&lt;em&gt;Emil Eifrem / &lt;a target="_blank" href="http://watch.neo4j.org/video/69627080"&gt;Presentation (Video)&lt;/a&gt; / &lt;a  target="_blank" href="http://www.slideshare.net/jaxlondon2012/new-opportunities-for-connected-data-ian-robinson"&gt;Presentation (Slides)&lt;/a&gt; / &lt;a  target="_blank" href="https://twitter.com/emileifrem"&gt;@emileifrem&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Intro/GraphDBs and Data Complexity&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Adoption rates of graph data-bases continue to increase, with telecom, financial services, and web/ISV-firms driving the bulk of growth.  This is primarily due to the evolution of data and data connectedness (Note: coming from a relational database model, you can think of connectedness as a data-model with lots of joins).  Although graph databases and graph modeling can seem intimidating, it's actually a very natural way to model the real-world.&lt;/p&gt;
+
+&lt;p&gt;For example, compare the complexity of answering the below questions in their respective domains in a relational DB versus a graph DB.&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+&lt;li&gt;Subway or Transit Systems: "How do I get from point A to point B?"&lt;/li&gt;
+
+&lt;li&gt;Data-Centers or Networks: "If switch X goes down, what systems are impacted?"&lt;/li&gt;
+
+&lt;li&gt;Recommendation Engines: "What did customers who bought this product also buy?"&lt;/li&gt;
+
+&lt;li&gt;Social Networks: "How many of my friends know person X?"&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These can certainly be modeled in a relational world, and the questions answered using appropriate algorithms but all of that extra work becomes unnecessary if you use a graph DB instead.  Adoption rates seem to indicate this assessment is correct, especially in products where determining correlations and causality is a key feature. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Graph DBs, Features and Benefits&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to being intuitive and natural to model, graph DBs also provide the advantage of providing constant query times even as the data-set grows.  That is, you are only paying the traversal of nodes (compare to outer joining on a large table).  Additionally, since graph DBs are have non-rigid structures, it is easier to evolve the structure of a graph DB when compared to a relational DB.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Querying a Graph DB&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;A graph consists of nodes (entities) and vertices (lines to other nodes).  Each of these vertices can be labeled with a relationship descriptor.  Additionally, each node can have N number of properties.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://www.neo4j.org/learn/cypher" target="_blank"&gt;Cypher&lt;/a&gt; is the language Neo4j provides to describe and query the graph. Cypher queries can provide the engine the following data:&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+&lt;li&gt;A starting node&lt;/li&gt;
+
+&lt;li&gt;What relationships to traverse&lt;/li&gt;
+
+&lt;li&gt;What data to return&lt;/li&gt;
+
+&lt;li&gt;What property values to match&lt;/li&gt;
+
+&lt;li&gt;How to order the data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;Designing and Building a Graph Database Application&lt;/span&gt;
+&lt;em&gt;Ian Robinson / &lt;a target="_blank" href="http://vimeo.com/76710631"&gt;Presentation (Video)&lt;/a&gt; / &lt;a target="_blank" href="http://iansrobinson.com/"&gt;Blog&lt;/a&gt; / &lt;a target="_blank" href="https://github.com/iansrobinson"&gt;GitHub&lt;/a&gt; / &lt;a target="_blank"  href="https://twitter.com/iansrobinson"&gt;@IansRobinson&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Not unlike the relational world, it's critical to model data correctly when building an application that is backed by a graph DB.  It's helpful to know the questions you are going to ask of your data when you are building your data-model.&lt;/p&gt;
+
+&lt;p&gt;Given a system that is used for knowledge management and exploring one's professional social network, a typical question asked of the system might be &amp;#34;Which people who work for the same company have the same skills as I do?&amp;#34;&lt;/p&gt;
+
+&lt;p&gt;Start by:&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+&lt;li&gt;Identifying entities (People, Companies, Skills)&lt;/li&gt;
+
+&lt;li&gt;Identifying relationships (A person WORKS_FOR a company, a person HAS_SKILL)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Convert these relationships and entities into cypher, and examine how easy (or difficult) it is to answer your sample question(s).  It may also be helpful to create a sample graph and ask the question(s) with the graph model in front of you (See slide 14).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Testing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tests should be similar to tests that you'd have in an application with a relational store.  In addition, you should be able to test that your data model is sufficient/adequate, as well as be able to ensure the queries you designed return the correct data.  Of course, these tests also serve the purpose of documentation and act as regression tests.&lt;/p&gt;
+
+&lt;p&gt;In Java, there is an entirely in-memory version of Neo4j that should only be used for testing.  This engine can be injected via dependency injection (as you would do with other dependencies). In doing so, you should also include a small, static data-set.  This should provide you the ability to easily execute your queries with full knowledge of what the correct response should be.  The exact strategy (how this gets injected, etc.) will depend on your architecture.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Neo4j Application/Platform Choices&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Neo4j has 3 options as far as how it can be installed/leveraged.&lt;/p&gt;
+
+&lt;ol class="style1"&gt;
+&lt;li&gt;Embedded&lt;/li&gt;
+
+&lt;ul class="style1"&gt; 
+    &lt;li&gt;Hosted in a Java process&lt;/li&gt;
+
+    &lt;li&gt;Provides native access to the Neo4j Java API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;li&gt;Server&lt;/li&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Wraps the embedded instance&lt;/li&gt;
+
+    &lt;li&gt;Provides a JSON REST interface&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;li&gt;Server with Extensions&lt;/li&gt;
+
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Provides a way to execute custom [Java] code on the server&lt;/li&gt;
+
+    &lt;li&gt;Provides you with a hook to control the HTTP request and response format&lt;/li&gt;
+
+    &lt;li&gt;Basically, provides a hook where into the HTTP pipeline (if you request &amp;#34;/get_skills/&amp;#34; handle it like this...)&lt;/li&gt;
+
+&lt;/ul&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There are specific code examples for writing unit tests of embedded code as well as Server Extensions starting at slide 30 of Ian's presentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;How Marvel Comics Uses Graph Databases&lt;/span&gt;
+&lt;em&gt;Peter Olson / &lt;a target="_blank" href="https://twitter.com/iansrobinson"&gt;Presentation (Video)&lt;/a&gt; / &lt;a target="_blank" href="https://twitter.com/Dethtron5000"&gt;@Dethtron5000&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Marvel has a significant inventory of stories, sprawling storylines, authors, and characters.  Additionally, stories from the marvel Universe don't obey the rules that we are likely used to modeling.  For example, characters can have a property for attribute for a very limited time, die and come back to life, exist in multiple places at once...there are basically no rules, whatsoever.  This would be a relational modeling nightmare.&lt;/p&gt;
+
+&lt;p&gt;Graph DBs are being used to solve a number of challenges associated with this universe.  For example, given this scenario: &amp;#34;A character is a superhero at a time T, which occurs in issue I.  This character is also related to an overarching theme in the Marvel history, and is part of a team.&amp;#34;&lt;/p&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;Creating Interactive Graph Visualizations&lt;/span&gt;
+&lt;em&gt;Corey Lanum / &lt;a target="_blank" href="http://watch.neo4j.org/video/64827612"&gt;Presentation (Video)&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The purpose of a visualization is to provide the user with a better understanding of the structure and relationships of the data. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;    Visualizing Nodes: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Use images and icons (as opposed to just circles with words in them)&lt;/li&gt;
+
+    &lt;li&gt;Use colors and/or gradients (gradients can be useful in expressing a numeric value, but don't get too fancy or combine colors and expect the user to know what you are expressing)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Visualizing Vertices: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Use colors to indicate categories of relationships&lt;/li&gt;
+
+    &lt;li&gt;Use width to indicate strength of a connection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Interactivity with the Graph: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;It is important to allow the user to easily add and remove filters&lt;/li&gt;
+
+    &lt;li&gt;Provide an easy way to combine qualities and aggregate them under a node&lt;/li&gt;
+
+    &lt;li&gt;Animation: If you are going to animate, make sure you do it in a way that does not cause the user to lose track of individual nodes (Note, out of the box D3 does not smoothly animate)&lt;/li&gt;
+
+    &lt;li&gt;Layout: Don't force the user into the layout you think is best for the data.  The user might be looking for something you were not looking for when you designed the application.  Provide multiple layouts for the same data-set.&lt;/li&gt;
+
+    &lt;li&gt;Explore: One of the biggest advantages of graph DBs is the ability to discover correlations and causality you did not intend n finding.  It is important you design visualizations with this in mind.  This also means you don't need to show all the data you have at once, because it may not all be relevant.  You can work around this by aggregating data under a node (think, "click to expand").  Aggregations can be done by grouping on common node properties, for example.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Visual Dangers&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Uniqueness:  Not every relationship is useful (Why do all nodes tie back to one node? This can cause a lot of noise on a graph visualization and provides little to no value most of the time)&lt;/li&gt;
+
+    &lt;li&gt;Structural Rigidity:  Don't assume that how you store your data is how users want to analyze/explore/think about the data.&lt;/li&gt;
+
+    &lt;li&gt;Don't overwhelm the user with data&lt;/li&gt;
+
+    &lt;li&gt;Don't try and be too clever. Make everything intuitive.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Common Mistakes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul class="style1"&gt;
+    &lt;li&gt;Using 3D (causes occlusion problems, is hard to navigate, hard to print)&lt;/li&gt;
+
+    &lt;li&gt;Bad color choices&lt;/li&gt;
+
+    &lt;li&gt;No labels (What does this vertex actually mean?)&lt;/li&gt;
+
+    &lt;li&gt;No legend&lt;/li&gt;
+
+    &lt;li&gt;No tooltips on hover&lt;/li&gt;
+
+    &lt;li&gt;Complexity (Not providing filtering)&lt;/li&gt;
+
+    &lt;li&gt;No emphasis on important nodes&lt;/li&gt;
+
+    &lt;li&gt;Black backgrounds&lt;/li&gt;
+
+    &lt;li&gt;Bad navigation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;Natural Language Search with Neo4j&lt;/span&gt;
+&lt;em&gt;Kenny Bastani / &lt;a target="_blank" href="http://www.slideshare.net/KennyBastani/natural-language-search-using-neo4j"&gt;Presentation (Slides)&lt;/a&gt; / &lt;a target="_blank" href="https://github.com/kbastani"&gt;GitHub&lt;/a&gt; / &lt;a target="_blank" href="https://twitter.com/kennybastani"&gt;@KennyBastani&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In terms of a graph DB, you can search by simply traversing paths, matching all of the paths that are &amp;#34;matches&amp;#34; (based on any criteria), and returning the matches.  Note, unlike a relational store, you are only paying the cost of the traversal (number of total nodes has little to no impact).&lt;/p&gt;
+
+&lt;p&gt;It is also possible (and useful) to model time in a graph DB.  Rather than modeling specific times and dates, Kenny explains that depending ont eh task at hand, it might be easier to model moments or snapshots in time.  See &lt;a href="http://gist.neo4j.org/?github-kbastani%2Fgists%2F%2Fmeta%2FTimeScaleEventMetaModel.adoc" target="_blank"&gt;this graph gist&lt;/a&gt; for more details, but essentially modeling&lt;/p&gt;
+
+&lt;blockquote&gt;
+    T0 &gt; T1 &gt; T2
+&lt;/blockquote&gt;
+
+&lt;p&gt;...is helpful in the context of natural language search (or search in general) because you can model out things like:&lt;/p&gt;
+
+&lt;blockquote&gt;
+At T0, Pam viewed Product X.  At T1, Pam viewed Product Y.  At T2, Pam purchased product X.
+&lt;/blockquote&gt;
+
+&lt;p&gt;With a larger sample set, it is possible to make useful deductions on this data.  For example, suggesting people who are viewing product Y to take a look at Product X.  Kenny suggests storing all these path traversals in non-real time, storing them in a JSON-friendly store, and then at runtime, extracting the relevant traversals based on some action (e.g., &lt;em&gt;Viewing product Y&lt;/em&gt;).  Note, Extrapolating path traversals can be compute intensive, you may want to distribute &amp;amp; map-reduce&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="false">http://www.SanjayUttam.com/2013/11/new-everything/</guid><link>http://www.sanjayuttam.com/2013/11/new-everything/</link><title>New Domain, New Platform, New Host</title><description>&lt;p&gt;Well...I finally got around to tweaking my blog, and in theory that will mean I actually get to writing a bit more.  This instance of my blog is running on &lt;a href="https://github.com/Sandra/Sandra.Snow/" target="_blank"&gt;Sandra Snow&lt;/a&gt;.  It's basically a port of &lt;a href="https://github.com/mojombo/jekyll" target="_blank"&gt;Jekyll&lt;/a&gt; with some additional features, and of course running on .NET (&lt;a href="https://github.com/NancyFx/Nancy" target="_blank"&gt;NancyFx&lt;/a&gt;) rather than Ruby.  The way both of these work is pretty much the same..&lt;/p&gt;
 
 &lt;p&gt;Create a mark-down files --&gt; Run Sandra.Snow --&gt; Get HTML pages --&gt; Push to GitHub&lt;/p&gt;
 
