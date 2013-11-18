@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en-US">
 <head>
 
-    <meta http-equiv="last-modified" content="2013-11-15T00:06:30.8655948-05:00" />
+    <meta http-equiv="last-modified" content="2013-11-18T09:33:39.3152971-05:00" />
 
     <title>sanjay.io</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -76,7 +76,7 @@
     <p>
         
 
-        <p>Last week I attended the NYC Neo4j Meetup on Data Modeling &amp; Natural Language Search, even better, I happened to win tickets to GraphConnect NYC which was just a few days later.  I decided to compile some notes from the event, but rather than just bullet-pointing out the content, I decided to compile a brief synopsis of each of the forums I attended so you know which slides to review or video to check out first.  This should be a pretty decent place to start if you're just looking to get your bearings when it comes to Graph DBs and Neo4j.  There are also a bunch of videos available at <a href="http://watch.neo4j.org/" target="_blank">http://watch.neo4j.org/</a>.</p>
+        <p>Last week I attended the NYC Neo4j Meetup on Data Modelling &amp; Natural Language Search, even better, I happened to win tickets to GraphConnect NYC which was just a few days later.  I decided to compile some notes from the event, but rather than just bullet-pointing out the content, I decided to compile a brief synopsis of each of the forums I attended so you know which slides to review or video to check out first.  This should be a pretty decent place to start if you're just looking to get your bearings when it comes to Graph DBs and Neo4j.  There are also a bunch of videos available at <a href="http://watch.neo4j.org/" target="_blank">http://watch.neo4j.org/</a>.</p>
 
 <hr/>
 
@@ -85,7 +85,7 @@
 
 <p><strong>Intro/GraphDBs and Data Complexity</strong></p>
 
-<p>Adoption rates of graph data-bases continue to increase, with telecom, financial services, and web/ISV-firms driving the bulk of growth.  This is primarily due to the evolution of data and data connectedness (Note: coming from a relational database model, you can think of connectedness as a data-model with lots of joins).  Although graph databases and graph modeling can seem intimidating, it's actually a very natural way to model the real-world.</p>
+<p>Adoption rates of graph data-bases continue to increase, with Telecom, financial services, and web/ISV-firms driving the bulk of growth.  This is primarily due to the evolution of data and data connectedness (Note: coming from a relational database model, you can think of connectedness as a data-model with lots of joins).  Although graph databases and graph modelling can seem intimidating, it's actually a very natural way to model the real-world.</p>
 
 <p>For example, compare the complexity of answering the below questions in their respective domains in a relational DB versus a graph DB.</p>
 
@@ -107,7 +107,7 @@
 
 <p><strong>Querying a Graph DB</strong></p>
 
-<p>A graph consists of nodes (entities) and vertices (lines to other nodes).  Each of these vertices can be labeled with a relationship descriptor.  Additionally, each node can have N number of properties.</p>
+<p>A graph consists of nodes (entities) and vertices (lines to other nodes).  Each of these vertices can be labelled with a relationship descriptor.  Additionally, each node can have N number of properties.</p>
 
 <p><a href="http://www.neo4j.org/learn/cypher" target="_blank">Cypher</a> is the language Neo4j provides to describe and query the graph. Cypher queries can provide the engine the following data:</p>
 
@@ -185,7 +185,7 @@
 <p><span class="byline">How Marvel Comics Uses Graph Databases</span>
 <em>Peter Olson / <a target="_blank" href="https://twitter.com/iansrobinson">Presentation (Video)</a> / <a target="_blank" href="https://twitter.com/Dethtron5000">@Dethtron5000</a></em></p>
 
-<p>Marvel has a significant inventory of stories, sprawling storylines, authors, and characters.  Additionally, stories from the marvel Universe don't obey the rules that we are likely used to modeling.  For example, characters can have a property for attribute for a very limited time, die and come back to life, exist in multiple places at once...there are basically no rules, whatsoever.  This would be a relational modeling nightmare.</p>
+<p>Marvel has a significant inventory of stories, sprawling story lines, authors, and characters.  Additionally, stories from the marvel Universe don't obey the rules that we are likely used to modeling.  For example, characters can have a property for attribute for a very limited time, die and come back to life, exist in multiple places at once...there are basically no rules, whatsoever.  This would be a relational modeling nightmare.</p>
 
 <p>Graph DBs are being used to solve a number of challenges associated with this universe.  For example, given this scenario: &#34;A character is a superhero at a time T, which occurs in issue I.  This character is also related to an overarching theme in the Marvel history, and is part of a team.&#34;</p>
 
@@ -194,7 +194,7 @@
 
 <p>The purpose of a visualization is to provide the user with a better understanding of the structure and relationships of the data. </p>
 
-<p><strong>    Visualizing Nodes: Dos and Don'ts</strong></p>
+<p><strong>    Visualizing Nodes: Dos and Don't s</strong></p>
 
 <ul class="style1">
     <li>Use images and icons (as opposed to just circles with words in them)</li>
@@ -202,7 +202,7 @@
     <li>Use colors and/or gradients (gradients can be useful in expressing a numeric value, but don't get too fancy or combine colors and expect the user to know what you are expressing)</li>
 </ul>
 
-<p><strong>Visualizing Vertices: Dos and Don'ts</strong></p>
+<p><strong>Visualizing Vertices: Dos and Don't s</strong></p>
 
 <ul class="style1">
     <li>Use colors to indicate categories of relationships</li>
@@ -210,7 +210,7 @@
     <li>Use width to indicate strength of a connection</li>
 </ul>
 
-<p><strong>Interactivity with the Graph: Dos and Don'ts</strong></p>
+<p><strong>Interactivity with the Graph: Dos and Don't s</strong></p>
 
 <ul class="style1">
     <li>It is important to allow the user to easily add and remove filters</li>
@@ -247,7 +247,7 @@
 
     <li>No legend</li>
 
-    <li>No tooltips on hover</li>
+    <li>No tool tips on hover</li>
 
     <li>Complexity (Not providing filtering)</li>
 
@@ -263,7 +263,7 @@
 
 <p>In terms of a graph DB, you can search by simply traversing paths, matching all of the paths that are &#34;matches&#34; (based on any criteria), and returning the matches.  Note, unlike a relational store, you are only paying the cost of the traversal (number of total nodes has little to no impact).</p>
 
-<p>It is also possible (and useful) to model time in a graph DB.  Rather than modeling specific times and dates, Kenny explains that depending ont eh task at hand, it might be easier to model moments or snapshots in time.  See <a href="http://gist.neo4j.org/?github-kbastani%2Fgists%2F%2Fmeta%2FTimeScaleEventMetaModel.adoc" target="_blank">this graph gist</a> for more details, but essentially modeling</p>
+<p>It is also possible (and useful) to model time in a graph DB.  Rather than modeling specific times and dates, Kenny explains that depending on the task at hand, it might be easier to model moments or snapshots in time.  See <a href="http://gist.neo4j.org/?github-kbastani%2Fgists%2F%2Fmeta%2FTimeScaleEventMetaModel.adoc" target="_blank">this graph gist</a> for more details, but essentially modelling</p>
 
 <blockquote>
     T0 > T1 > T2
