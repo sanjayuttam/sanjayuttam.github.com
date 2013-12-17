@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en-US">
 <head>
 
-    <meta http-equiv="last-modified" content="2013-12-13T15:37:43.1313163-05:00" />
+    <meta http-equiv="last-modified" content="2013-12-17T09:42:19.4766197-05:00" />
 
     <title>sanjay.io</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -47,6 +47,58 @@
 			if they get too long. You can also remove the "byline" span entirely if you don't
 			need a byline.
 			-->
+            <h2><a href="/2013/12/everything-that-is-wrong-with-on-demand-loading/">Everything That is Wrong With On-Demand Loading</a> </h2>
+            
+        </header>
+        <div class="info">
+            <!--
+											Note: The date should be formatted exactly as it's shown below. In particular, the
+											"least significant" characters of the month should be encapsulated in a <span>
+											element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
+											Oh, and if you don't need a date for a particular page or post you can simply delete
+											the entire "date" element.
+											
+										-->
+            <span class="date"><span class="month">Dec<span></span></span> <span class="day">16</span><span class="year">, 2013</span></span>
+            <!--
+											Note: You can change the number of list items in "stats" to whatever you want.
+										-->
+        <ul class="stats">
+            <li><a href="#" class="addthis_32x32_style addthis_button_facebook" addthis:title="Everything That is Wrong With On-Demand Loading" addthis:url="http://www.sanjay.io/2013/12/everything-that-is-wrong-with-on-demand-loading/"></a></li>
+            <li><a href="#" class="addthis_32x32_style addthis_button_twitter" addthis:title="Everything That is Wrong With On-Demand Loading" addthis:url="http://www.sanjay.io/2013/12/everything-that-is-wrong-with-on-demand-loading/"></a></li>
+            <li><a href="#" class="addthis_32x32_style addthis_button_linkedin" addthis:title="Everything That is Wrong With On-Demand Loading" addthis:url="http://www.sanjay.io/2013/12/everything-that-is-wrong-with-on-demand-loading/"></a></li>  
+            <li><a href="#" class="addthis_32x32_style addthis_button_email" addthis:title="Everything That is Wrong With On-Demand Loading" addthis:url="http://www.sanjay.io/2013/12/everything-that-is-wrong-with-on-demand-loading/"></a></li>
+
+        </ul>
+
+
+
+
+        </div>
+
+        <p>
+            <p>I think at some point before AJAX was the norm for consumer-facing web-apps, I probably thought on-demand loading was cool, too.  Now, it's usually a usability nightmare.  It's even worse if we're talking about responsive sites on mobile devices because they've got to serve a variety of clients on a variety of connection speeds.  Last night, while drinking a glass of wine and trying to do some on-line shopping on my phone, I ended up at multiple e-commerce websites that had implemented on-demand loading.  None of them nailed it.  Some were better than others.  The exact use case on all the sites was this:</p>
+
+<ol class='style1'>
+<li>User selects some category ("Men's Shirts" or "sale")</li>
+<li>A list of the first N results is loaded, the user can scrolls vertically (e.g., 1 column, N rows) </li>
+<li>When the user gets to the bottom of the results, either the page ajax-loads the next N number, or the user can click to initiate the loading of the next N results.</li>
+</ol>
+
+
+
+        </p>
+        <p><a href="/2013/12/everything-that-is-wrong-with-on-demand-loading/">Read more...</a></p>
+
+    </article>
+    <!-- Post -->
+    <article class="is-post is-post-excerpt">
+        <header>
+            <!--
+			Note: Titles and bylines will wrap automatically when necessary, so don't worry
+			if they get too long. You can also remove the "byline" span entirely if you don't
+			need a byline.
+			-->
             <h2><a href="/2013/12/checking-if-youre-being-filtered-on-outbound-ports/">Checking if You're Being Blocked on Outbound Ports</a> </h2>
             
         </header>
@@ -77,11 +129,8 @@
         </div>
 
         <p>
-            <p>Earlier this week I spent some time playing with Redis on my local dev box.  Set-up was smooth sailing; install virtual box w/Ubuntu, Redis, set up port forwarding from a host port to a guest port, grab ServiceStack.Redis...I was on my way.  Things got a bit more interesting after I deployed Redis to Azure.  I changed the configuration in my little console test application to point to the Azure instance.  It was running on the default Redis port, 6379.  Fired up the console application...tried a SET.  Timed out.  Tried it again - same result.  After verifying that the service was running on the box over SSH, I concluded it had to be some outbound filtering.  Sure, I could fire up telnet and go to 6379 on my Redis box, but that assumes that there isn't some Azure configuration blocking that port, IPTables isn't blocking that port, and there isn't some Redis configuration I was missing.  Those were all important, but I <em>only</em> wanted to verify I was able to get outbound on 6379.  Turns out...there is a tool for that: <a target="_blank" href="http://portquiz.net/">PortQuiz</a></p>
+            <p>Earlier this week I spent some time playing with Redis on my local dev box.  Set-up was smooth sailing; install virtual box w/Ubuntu, Redis, set up port forwarding from a host port to a guest port, grab ServiceStack.Redis...I was on my way.  Things got a bit more interesting after I deployed Redis to Azure.  I changed the configuration in my little console test application to point to the Azure instance.  It was running on the default Redis port, 6379.  Fired up the console application...tried a SET.  Timed out.  Tried it again - same result.  </p>
 
-<p>It's super simple.  Basically, the portQuiz server is listening on all ports.  This means you can go ahead and telnet to any port.  If it times out, you're being filtered outbound. This way, you can be sure it's actually port filtering and not a missing or bad configuration somewhere else in your stack.  </p>
-
-<p>So, check it out next time you want to eliminate this as a possibility, <a target="_blank" href="http://portquiz.net/">PortQuiz.net</a></p>
 
 
         </p>
@@ -173,204 +222,6 @@
         <p>
             <p>Last week I attended the NYC Neo4j Meetup on Data Modeling &amp; Natural Language Search, even better, I happened to win tickets to GraphConnect NYC which was just a few days later.  I decided to compile some notes from the event, but rather than just bullet-pointing out the content, I decided to compile a brief synopsis of each of the forums I attended so you know which slides to review or video to check out first.  This should be a pretty decent place to start if you're just looking to get your bearings when it comes to Graph DBs and Neo4j.  There are also a bunch of videos available at <a href="http://watch.neo4j.org/" target="_blank">http://watch.neo4j.org/</a>.</p>
 
-<hr/>
-
-<p><span class="byline">New Opportunities for Connected Data</span>
-<em>Emil Eifrem / <a target="_blank" href="http://watch.neo4j.org/video/69627080">Presentation (Video)</a> / <a  target="_blank" href="http://www.slideshare.net/jaxlondon2012/new-opportunities-for-connected-data-ian-robinson">Presentation (Slides)</a> / <a  target="_blank" href="https://twitter.com/emileifrem">@emileifrem</a></em></p>
-
-<p><strong>Intro/GraphDBs and Data Complexity</strong></p>
-
-<p>Adoption rates of graph data-bases continue to increase, with telecom, financial services, and web/ISV-firms driving the bulk of growth.  This is primarily due to the evolution of data and data connectedness (Note: coming from a relational database model, you can think of connectedness as a data-model with lots of joins).  Although graph databases and graph modeling can seem intimidating, it's actually a very natural way to model the real-world.</p>
-
-<p>For example, compare the complexity of answering the below questions in their respective domains in a relational DB versus a graph DB.</p>
-
-<ul class="style1">
-<li>Subway or Transit Systems: "How do I get from point A to point B?"</li>
-
-<li>Data-Centers or Networks: "If switch X goes down, what systems are impacted?"</li>
-
-<li>Recommendation Engines: "What did customers who bought this product also buy?"</li>
-
-<li>Social Networks: "How many of my friends know person X?"</li>
-</ul>
-
-<p>These can certainly be modeled in a relational world, and the questions answered using appropriate algorithms but all of that extra work becomes unnecessary if you use a graph DB instead.  Adoption rates seem to indicate this assessment is correct, especially in products where determining correlations and causality is a key feature. </p>
-
-<p><strong>Graph DBs, Features and Benefits</strong></p>
-
-<p>In addition to being intuitive and natural to model, graph DBs also provide the advantage of providing constant query times even as the data-set grows.  That is, you are only paying the traversal of nodes (compare to outer joining on a large table).  Additionally, since graph DBs are have non-rigid structures, it is easier to evolve the structure of a graph DB when compared to a relational DB.</p>
-
-<p><strong>Querying a Graph DB</strong></p>
-
-<p>A graph consists of nodes (entities) and vertices (lines to other nodes).  Each of these vertices can be labeled with a relationship descriptor.  Additionally, each node can have N number of properties.</p>
-
-<p><a href="http://www.neo4j.org/learn/cypher" target="_blank">Cypher</a> is the language Neo4j provides to describe and query the graph. Cypher queries can provide the engine the following data:</p>
-
-<ul class="style1">
-<li>A starting node</li>
-
-<li>What relationships to traverse</li>
-
-<li>What data to return</li>
-
-<li>What property values to match</li>
-
-<li>How to order the data</li>
-</ul>
-
-<p><span class="byline">Designing and Building a Graph Database Application</span>
-<em>Ian Robinson / <a target="_blank" href="http://vimeo.com/76710631">Presentation (Video)</a> / <a target="_blank" href="http://iansrobinson.com/">Blog</a> / <a target="_blank" href="https://github.com/iansrobinson">GitHub</a> / <a target="_blank"  href="https://twitter.com/iansrobinson">@IansRobinson</a></em></p>
-
-<p>Not unlike the relational world, it's critical to model data correctly when building an application that is backed by a graph DB.  It's helpful to know the questions you are going to ask of your data when you are building your data-model.</p>
-
-<p>Given a system that is used for knowledge management and exploring one's professional social network, a typical question asked of the system might be &#34;Which people who work for the same company have the same skills as I do?&#34;</p>
-
-<p>Start by:</p>
-
-<ul class="style1">
-<li>Identifying entities (People, Companies, Skills)</li>
-
-<li>Identifying relationships (A person WORKS_FOR a company, a person HAS_SKILL)</li>
-</ul>
-
-<p>Convert these relationships and entities into cypher, and examine how easy (or difficult) it is to answer your sample question(s).  It may also be helpful to create a sample graph and ask the question(s) with the graph model in front of you (See slide 14).</p>
-
-<p><strong>Testing</strong></p>
-
-<p>Tests should be similar to tests that you'd have in an application with a relational store.  In addition, you should be able to test that your data model is sufficient/adequate, as well as be able to ensure the queries you designed return the correct data.  Of course, these tests also serve the purpose of documentation and act as regression tests.</p>
-
-<p>In Java, there is an entirely in-memory version of Neo4j that should only be used for testing.  This engine can be injected via dependency injection (as you would do with other dependencies). In doing so, you should also include a small, static data-set.  This should provide you the ability to easily execute your queries with full knowledge of what the correct response should be.  The exact strategy (how this gets injected, etc.) will depend on your architecture.</p>
-
-<p><strong>Neo4j Application/Platform Choices</strong></p>
-
-<p>Neo4j has 3 options as far as how it can be installed/leveraged.</p>
-
-<ol class="style1">
-<li>Embedded</li>
-
-<ul class="style1"> 
-    <li>Hosted in a Java process</li>
-
-    <li>Provides native access to the Neo4j Java API</li>
-</ul>
-
-<li>Server</li>
-
-<ul class="style1">
-    <li>Wraps the embedded instance</li>
-
-    <li>Provides a JSON REST interface</li>
-</ul>
-
-<li>Server with Extensions</li>
-
-
-<ul class="style1">
-    <li>Provides a way to execute custom [Java] code on the server</li>
-
-    <li>Provides you with a hook to control the HTTP request and response format</li>
-
-    <li>Basically, provides a hook where into the HTTP pipeline (if you request &#34;/get_skills/&#34; handle it like this...)</li>
-
-</ul>
-</ol>
-
-<p>There are specific code examples for writing unit tests of embedded code as well as Server Extensions starting at slide 30 of Ian's presentation.</p>
-
-<p><span class="byline">How Marvel Comics Uses Graph Databases</span>
-<em>Peter Olson / <a target="_blank" href="https://twitter.com/iansrobinson">Presentation (Video)</a> / <a target="_blank" href="https://twitter.com/Dethtron5000">@Dethtron5000</a></em></p>
-
-<p>Marvel has a significant inventory of stories, sprawling storylines, authors, and characters.  Additionally, stories from the marvel Universe don't obey the rules that we are likely used to modeling.  For example, characters can have a property for attribute for a very limited time, die and come back to life, exist in multiple places at once...there are basically no rules, whatsoever.  This would be a relational modeling nightmare.</p>
-
-<p>Graph DBs are being used to solve a number of challenges associated with this universe.  For example, given this scenario: &#34;A character is a superhero at a time T, which occurs in issue I.  This character is also related to an overarching theme in the Marvel history, and is part of a team.&#34;</p>
-
-<p><span class="byline">Creating Interactive Graph Visualizations</span>
-<em>Corey Lanum / <a target="_blank" href="http://watch.neo4j.org/video/64827612">Presentation (Video)</a></em></p>
-
-<p>The purpose of a visualization is to provide the user with a better understanding of the structure and relationships of the data. </p>
-
-<p><strong>    Visualizing Nodes: Dos and Don'ts</strong></p>
-
-<ul class="style1">
-    <li>Use images and icons (as opposed to just circles with words in them)</li>
-
-    <li>Use colors and/or gradients (gradients can be useful in expressing a numeric value, but don't get too fancy or combine colors and expect the user to know what you are expressing)</li>
-</ul>
-
-<p><strong>Visualizing Vertices: Dos and Don'ts</strong></p>
-
-<ul class="style1">
-    <li>Use colors to indicate categories of relationships</li>
-
-    <li>Use width to indicate strength of a connection</li>
-</ul>
-
-<p><strong>Interactivity with the Graph: Dos and Don'ts</strong></p>
-
-<ul class="style1">
-    <li>It is important to allow the user to easily add and remove filters</li>
-
-    <li>Provide an easy way to combine qualities and aggregate them under a node</li>
-
-    <li>Animation: If you are going to animate, make sure you do it in a way that does not cause the user to lose track of individual nodes (Note, out of the box D3 does not smoothly animate)</li>
-
-    <li>Layout: Don't force the user into the layout you think is best for the data.  The user might be looking for something you were not looking for when you designed the application.  Provide multiple layouts for the same data-set.</li>
-
-    <li>Explore: One of the biggest advantages of graph DBs is the ability to discover correlations and causality you did not intend n finding.  It is important you design visualizations with this in mind.  This also means you don't need to show all the data you have at once, because it may not all be relevant.  You can work around this by aggregating data under a node (think, "click to expand").  Aggregations can be done by grouping on common node properties, for example.</li>
-</ul>
-
-<p><strong>Visual Dangers</strong></p>
-
-<ul class="style1">
-    <li>Uniqueness:  Not every relationship is useful (Why do all nodes tie back to one node? This can cause a lot of noise on a graph visualization and provides little to no value most of the time)</li>
-
-    <li>Structural Rigidity:  Don't assume that how you store your data is how users want to analyze/explore/think about the data.</li>
-
-    <li>Don't overwhelm the user with data</li>
-
-    <li>Don't try and be too clever. Make everything intuitive.</li>
-</ul>
-
-<p><strong>Common Mistakes</strong></p>
-
-<ul class="style1">
-    <li>Using 3D (causes occlusion problems, is hard to navigate, hard to print)</li>
-
-    <li>Bad color choices</li>
-
-    <li>No labels (What does this vertex actually mean?)</li>
-
-    <li>No legend</li>
-
-    <li>No tooltips on hover</li>
-
-    <li>Complexity (Not providing filtering)</li>
-
-    <li>No emphasis on important nodes</li>
-
-    <li>Black backgrounds</li>
-
-    <li>Bad navigation</li>
-</ul>
-
-<p><span class="byline">Natural Language Search with Neo4j</span>
-<em>Kenny Bastani / <a target="_blank" href="http://www.slideshare.net/KennyBastani/natural-language-search-using-neo4j">Presentation (Slides)</a> / <a target="_blank" href="https://github.com/kbastani">GitHub</a> / <a target="_blank" href="https://twitter.com/kennybastani">@KennyBastani</a></em></p>
-
-<p>In terms of a graph DB, you can search by simply traversing paths, matching all of the paths that are &#34;matches&#34; (based on any criteria), and returning the matches.  Note, unlike a relational store, you are only paying the cost of the traversal (number of total nodes has little to no impact).</p>
-
-<p>It is also possible (and useful) to model time in a graph DB.  Rather than modeling specific times and dates, Kenny explains that depending ont eh task at hand, it might be easier to model moments or snapshots in time.  See <a href="http://gist.neo4j.org/?github-kbastani%2Fgists%2F%2Fmeta%2FTimeScaleEventMetaModel.adoc" target="_blank">this graph gist</a> for more details, but essentially modeling</p>
-
-<blockquote>
-    T0 > T1 > T2
-</blockquote>
-
-<p>...is helpful in the context of natural language search (or search in general) because you can model out things like:</p>
-
-<blockquote>
-At T0, Pam viewed Product X.  At T1, Pam viewed Product Y.  At T2, Pam purchased product X.
-</blockquote>
-
-<p>With a larger sample set, it is possible to make useful deductions on this data.  For example, suggesting people who are viewing product Y to take a look at Product X.  Kenny suggests storing all these path traversals in non-real time, storing them in a JSON-friendly store, and then at runtime, extracting the relevant traversals based on some action (e.g., <em>Viewing product Y</em>).  Note, Extrapolating path traversals can be compute intensive, you may want to distribute &amp; map-reduce</p>
 
 
         </p>
@@ -419,11 +270,6 @@ At T0, Pam viewed Product X.  At T1, Pam viewed Product Y.  At T2, Pam purchased
 
 <p>Well...I finally got around to tweaking my blog, and in theory that will mean I actually get to writing a bit more.  This instance of my blog is running on <a href="https://github.com/Sandra/Sandra.Snow/" target="_blank">Sandra Snow</a>.  It's basically a port of <a href="https://github.com/mojombo/jekyll" target="_blank">Jekyll</a> with some additional features, and of course running on .NET (<a href="https://github.com/NancyFx/Nancy" target="_blank">NancyFx</a>) rather than Ruby.  The way both of these work is pretty much the same..</p>
 
-<p>Create a mark-down files --> Run Sandra.Snow --> Get HTML pages --> Push to GitHub</p>
-
-<p>A mark-down file is really just a text file with some basic keywords (you can find more info on the specifics <a href="https://github.com/Sandra/Sandra.Snow/wiki/Markdown-File-Header" target="_blank">here</a>).  Sandra.Snow basically reads these in, parses to appy the some rules (paging, etc.), and then spits out some pretty HTML which I push to GitHub (hello, entirely free hosting).  This all means that when you hit my blog, you are hitting purely static HTML; zero database calls (well, unless GitHub is doing some).</p>
-
-<p>Thanks to <a href="https://twitter.com/philliphaydon" target="_blank">@PhillipHaydon</a> and <a href="https://twitter.com/jchannon" target="_blank">@jchannon</a> for their work on putting this together.  </p>
 
 
         </p>

@@ -1,9 +1,77 @@
-﻿<?xml version="1.0" encoding="utf-8"?><rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sanjay Uttam's Blog</title><link>http://www.sanjay.io/feed.xml</link><description>Sanjay Uttam's Blog</description><item><guid isPermaLink="true">http://www.sanjay.io/2013/12/checking-if-youre-being-filtered-on-outbound-ports/</guid><link>http://www.sanjay.io/2013/12/checking-if-youre-being-filtered-on-outbound-ports/</link><title>Checking if You're Being Blocked on Outbound Ports</title><description>&lt;p&gt;Earlier this week I spent some time playing with Redis on my local dev box.  Set-up was smooth sailing; install virtual box w/Ubuntu, Redis, set up port forwarding from a host port to a guest port, grab ServiceStack.Redis...I was on my way.  Things got a bit more interesting after I deployed Redis to Azure.  I changed the configuration in my little console test application to point to the Azure instance.  It was running on the default Redis port, 6379.  Fired up the console application...tried a SET.  Timed out.  Tried it again - same result.  After verifying that the service was running on the box over SSH, I concluded it had to be some outbound filtering.  Sure, I could fire up telnet and go to 6379 on my Redis box, but that assumes that there isn't some Azure configuration blocking that port, IPTables isn't blocking that port, and there isn't some Redis configuration I was missing.  Those were all important, but I &lt;em&gt;only&lt;/em&gt; wanted to verify I was able to get outbound on 6379.  Turns out...there is a tool for that: &lt;a target="_blank" href="http://portquiz.net/"&gt;PortQuiz&lt;/a&gt;&lt;/p&gt;
+﻿<?xml version="1.0" encoding="utf-8"?><rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sanjay Uttam's Blog</title><link>http://www.sanjay.io/feed.xml</link><description>Sanjay Uttam's Blog</description><item><guid isPermaLink="true">http://www.sanjay.io/2013/12/everything-that-is-wrong-with-on-demand-loading/</guid><link>http://www.sanjay.io/2013/12/everything-that-is-wrong-with-on-demand-loading/</link><title>Everything That is Wrong With On-Demand Loading</title><description>&lt;p&gt;I think at some point before AJAX was the norm for consumer-facing web-apps, I probably thought on-demand loading was cool, too.  Now, it's usually a usability nightmare.  It's even worse if we're talking about responsive sites on mobile devices because they've got to serve a variety of clients on a variety of connection speeds.  Last night, while drinking a glass of wine and trying to do some on-line shopping on my phone, I ended up at multiple e-commerce websites that had implemented on-demand loading.  None of them nailed it.  Some were better than others.  The exact use case on all the sites was this:&lt;/p&gt;
 
-&lt;p&gt;It's super simple.  Basically, the portQuiz server is listening on all ports.  This means you can go ahead and telnet to any port.  If it times out, you're being filtered outbound. This way, you can be sure it's actually port filtering and not a missing or bad configuration somewhere else in your stack.  &lt;/p&gt;
+&lt;ol class='style1'&gt;
+&lt;li&gt;User selects some category ("Men's Shirts" or "sale")&lt;/li&gt;
+&lt;li&gt;A list of the first N results is loaded, the user can scrolls vertically (e.g., 1 column, N rows) &lt;/li&gt;
+&lt;li&gt;When the user gets to the bottom of the results, either the page ajax-loads the next N number, or the user can click to initiate the loading of the next N results.&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;So, check it out next time you want to eliminate this as a possibility, &lt;a target="_blank" href="http://portquiz.net/"&gt;PortQuiz.net&lt;/a&gt;&lt;/p&gt;
-</description><pubDate>Fri, 13 Dec 2013 05:00:00 Z</pubDate><a10:updated>2013-12-13T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;Earlier this week I spent some time playing with Redis on my local dev box.  Set-up was smooth sailing; install virtual box w/Ubuntu, Redis, set up port forwarding from a host port to a guest port, grab ServiceStack.Redis...I was on my way.  Things got a bit more interesting after I deployed Redis to Azure.  I changed the configuration in my little console test application to point to the Azure instance.  It was running on the default Redis port, 6379.  Fired up the console application...tried a SET.  Timed out.  Tried it again - same result.  After verifying that the service was running on the box over SSH, I concluded it had to be some outbound filtering.  Sure, I could fire up telnet and go to 6379 on my Redis box, but that assumes that there isn't some Azure configuration blocking that port, IPTables isn't blocking that port, and there isn't some Redis configuration I was missing.  Those were all important, but I &lt;em&gt;only&lt;/em&gt; wanted to verify I was able to get outbound on 6379.  Turns out...there is a tool for that: &lt;a target="_blank" href="http://portquiz.net/"&gt;PortQuiz&lt;/a&gt;&lt;/p&gt;
+</description><pubDate>Mon, 16 Dec 2013 05:00:00 Z</pubDate><a10:updated>2013-12-16T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;I think at some point before AJAX was the norm for consumer-facing web-apps, I probably thought on-demand loading was cool, too.  Now, it's usually a usability nightmare.  It's even worse if we're talking about responsive sites on mobile devices because they've got to serve a variety of clients on a variety of connection speeds.  Last night, while drinking a glass of wine and trying to do some on-line shopping on my phone, I ended up at multiple e-commerce websites that had implemented on-demand loading.  None of them nailed it.  Some were better than others.  The exact use case on all the sites was this:&lt;/p&gt;
+
+&lt;ol class='style1'&gt;
+&lt;li&gt;User selects some category ("Men's Shirts" or "sale")&lt;/li&gt;
+&lt;li&gt;A list of the first N results is loaded, the user can scrolls vertically (e.g., 1 column, N rows) &lt;/li&gt;
+&lt;li&gt;When the user gets to the bottom of the results, either the page ajax-loads the next N number, or the user can click to initiate the loading of the next N results.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;&lt;span class="byline"&gt;How does this suck?  Let me count the ways.&lt;/span&gt;&lt;/p&gt;
+
+&lt;ol class="style1"&gt;
+&lt;li&gt;You just trashed my back button.  I'm scrolling down your seemingly infinite list of shirts.  I find one that I want to take a closer look at and in doing so.  I click on it, decide I either do or don't want to add it to my cart.  I'd like to continue shopping now, but when I hit back, I'm at the "top" of your list (e.g., I need to scroll down and on-demand load to get to where I left off).  Navigating back to the product list doesn't help of course.  That's a pretty terrible experience.  I am now forced to open in a new tab when I return to your product list.  (Hint: Don't break this functionality if you're doing on demand loading coughhugoboss.comcough)&lt;/li&gt;
+
+&lt;!-- &lt;img src="/images/BBBrokenBackButton2.gif" class="image image-left"&gt; --&gt;
+
+&lt;li&gt;In using on demand loading, you are relinquishing the control you had over the quality of my experience when I visit your site.  That's because although I'm staring at your  fancy-loading-animated-gif-that-looks-eerily-like-facebooks, it can only go as fast as my connection permits.  There were times last night when I was browsing and sites would take between 5 and 10 seconds to load the next N results. (Hint: If your Ajax request takes as long or longer than a full page load, that's a problem).  Of course, this could be due to multiple factors -on either end- but as far as I'm concerned you need to address as many of them as you can from a developer standpoint:&lt;/li&gt;
+    &lt;ul class="style1"&gt;
+        &lt;li&gt;
+        My connection was slow, or inconsistent (fallback to normal pagination on your end if speed is below X/s or at least provide a button prompting me to load the next page)
+        &lt;/li&gt;
+
+        &lt;li&gt;
+        Your server is not [consistently] fast (hook up a reverse proxy, data-cache...reduce payload, etc.)
+        &lt;/li&gt;
+    &lt;/ul&gt;
+
+&lt;figure&gt;
+    &lt;img src='/images/BBSlowLoading.png' alt='Brooks Brothers Loads Slowly'  class='image image-centered'/&gt;
+    &lt;figcaption&gt;Going to Brooks Brothers on a slowish connection?  
+    &lt;br/&gt;
+    You're going to see a lot of this.&lt;/figcaption&gt;
+&lt;/figure&gt;   
+&lt;br/&gt;   
+
+The bottom line is, don't punish me for having a less-than-perfect connection if you can help it especially when you are assuming your site will be consumed by mobile clients (e.g., it's responsive). 
+
+&lt;li&gt;This one is somewhat related to the speed issue above.  If you're going to do on-demand loading for this type of scenario, provide the user with a way to initiate the "next page" themselves.  This provides the user with some level of understanding as to the proposed next step in the process.  If my connection is slow, then at least I know there is in fact another "page" to see.  If you don't provide this button, I really have no choice but to scroll vertically to the bottom of the page, and cross-my fingers to see if there are more products.  If things don't start happening pretty quickly, I may very well assume I have seen all there is to see.&lt;/li&gt;
+
+&lt;!-- &lt;img src="/images/BossPromptLoad.gif" class="image image-left"&gt; --&gt;
+
+&lt;figure&gt;
+    &lt;img src='/images/BossClickToLoad.png' alt='Brooks Brothers Loads Slowly'  class='image image-centered'/&gt;
+    &lt;figcaption&gt;Boss got it right.  
+    &lt;br/&gt;
+    The user prompts the next page load.&lt;/figcaption&gt;
+&lt;/figure&gt;   
+
+&lt;li&gt;You pretty much made it impossible to find anything the second time in a time efficient manner, unless I memorized the &lt;em&gt;exact name of the product&lt;/em&gt; (hint: I didn't, I'm drinking a glass of wine for cryin' out loud.) Why is this?  Well since you're doing this fancy on-demand loading you somehow decided to just pretend that even though it's actually just paging, I don't deserve to ever know what page I'm on.  If this was 2003, I probably would have just made a mental note of the page that had that shirt that I liked on it.  That isn't even a possibility given this user-experience.  This brings me to the next point...&lt;/li&gt;
+
+&lt;!-- &lt;img src="/images/BBBrokenBackButton2.gif" class="image image-left"&gt; --&gt;
+
+&lt;li&gt;You have totally trashed any kind of &lt;em&gt;find&lt;/em&gt; functionality.  I know what you're thinking, who uses &lt;em&gt;find&lt;/em&gt; when they're using their mobile device?  I get that, and I agree.  But just because it's only the 20% that are going to try to use this, does that give you the right totally break it?  As a user, I'd like my find button to work, please.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So, if you're thinking about using on-demand loading, think through it a little bit.  Make the end-user experience the most important factor you consider.  Don't assume they're on a fast connection, especially if you're going the responsive route.  My patience on a mobile device is not the same as it is when I've got a keyboard and mouse in front of me.&lt;/p&gt;
+
+&lt;p&gt;&lt;/rant&gt;&lt;/p&gt;
+</a10:content></item><item><guid isPermaLink="true">http://www.sanjay.io/2013/12/checking-if-youre-being-filtered-on-outbound-ports/</guid><link>http://www.sanjay.io/2013/12/checking-if-youre-being-filtered-on-outbound-ports/</link><title>Checking if You're Being Blocked on Outbound Ports</title><description>&lt;p&gt;Earlier this week I spent some time playing with Redis on my local dev box.  Set-up was smooth sailing; install virtual box w/Ubuntu, Redis, set up port forwarding from a host port to a guest port, grab ServiceStack.Redis...I was on my way.  Things got a bit more interesting after I deployed Redis to Azure.  I changed the configuration in my little console test application to point to the Azure instance.  It was running on the default Redis port, 6379.  Fired up the console application...tried a SET.  Timed out.  Tried it again - same result.  &lt;/p&gt;
+
+</description><pubDate>Fri, 13 Dec 2013 05:00:00 Z</pubDate><a10:updated>2013-12-13T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;Earlier this week I spent some time playing with Redis on my local dev box.  Set-up was smooth sailing; install virtual box w/Ubuntu, Redis, set up port forwarding from a host port to a guest port, grab ServiceStack.Redis...I was on my way.  Things got a bit more interesting after I deployed Redis to Azure.  I changed the configuration in my little console test application to point to the Azure instance.  It was running on the default Redis port, 6379.  Fired up the console application...tried a SET.  Timed out.  Tried it again - same result.  &lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;After verifying that the service was running on the box over SSH, I concluded it had to be some outbound filtering.  Sure, I could fire up telnet and go to 6379 on my Redis box, but that assumes that there isn't some Azure configuration blocking that port, IPTables isn't blocking that port, and there isn't some Redis configuration I was missing.  Those were all important, but I &lt;em&gt;only&lt;/em&gt; wanted to verify I was able to get outbound on 6379.  Turns out...there is a tool for that: &lt;a target="_blank" href="http://portquiz.net/"&gt;PortQuiz&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;It's super simple.  Basically, the portQuiz server is listening on all ports.  This means you can go ahead and telnet to any port.  If it times out, you're being filtered outbound. This way, you can be sure it's actually port filtering and not a missing or bad configuration somewhere else in your stack.  &lt;/p&gt;
 
@@ -12,205 +80,9 @@
 </description><pubDate>Tue, 03 Dec 2013 05:00:00 Z</pubDate><a10:updated>2013-12-03T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;I came across this error today while moving some source around TFS.  I had moved a project from from TFS Project Collection to another, done a get latest and everything built just fine.  However, when trying to run unit tests after all the tests were discovered, I saw the "Exception has Been Thrown by the Target of an Invocation When Attempting to Run Unit Tests" error message in the Output window.  I figured I'd try doing a get latest and running the tests on my other machine.  That worked without issue.  That was the first big clue; this had to do with my VS, not the source that was checked in.  After trying pretty much everything in this &lt;a href="http://hjerpbakk.com/blog/2011/5/30/exception-has-been-thrown-by-the-target-of-an-invocation.html" target="_blank"&gt;blog post&lt;/a&gt;, I did a quick compare on VS versions; noticed the machine where everything was working had Visual Studio Update 3, the machine that was throwing this error did not.  I went ahead and installed that.  Great, that had to be it right? WRONG.  That just caused me to get a different error, even &lt;em&gt;more&lt;/em&gt; nebulous error; "Executor Process Exited".  Clearly this was still environmental.  Turns out the answer was going into Test Settings and changing the default processor architecture to x64.  That is, Test &gt; Test Settings &gt; Default Processor Architecture &gt; x64.  Cue unicorns and rainbows.&lt;/p&gt;
 </a10:content></item><item><guid isPermaLink="true">http://www.sanjay.io/2013/11/graphconnect-nyc/</guid><link>http://www.sanjay.io/2013/11/graphconnect-nyc/</link><title>#GraphConnect NYC Coverage</title><description>&lt;p&gt;Last week I attended the NYC Neo4j Meetup on Data Modeling &amp;amp; Natural Language Search, even better, I happened to win tickets to GraphConnect NYC which was just a few days later.  I decided to compile some notes from the event, but rather than just bullet-pointing out the content, I decided to compile a brief synopsis of each of the forums I attended so you know which slides to review or video to check out first.  This should be a pretty decent place to start if you're just looking to get your bearings when it comes to Graph DBs and Neo4j.  There are also a bunch of videos available at &lt;a href="http://watch.neo4j.org/" target="_blank"&gt;http://watch.neo4j.org/&lt;/a&gt;.&lt;/p&gt;
 
-&lt;hr/&gt;
-
-&lt;p&gt;&lt;span class="byline"&gt;New Opportunities for Connected Data&lt;/span&gt;
-&lt;em&gt;Emil Eifrem / &lt;a target="_blank" href="http://watch.neo4j.org/video/69627080"&gt;Presentation (Video)&lt;/a&gt; / &lt;a  target="_blank" href="http://www.slideshare.net/jaxlondon2012/new-opportunities-for-connected-data-ian-robinson"&gt;Presentation (Slides)&lt;/a&gt; / &lt;a  target="_blank" href="https://twitter.com/emileifrem"&gt;@emileifrem&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Intro/GraphDBs and Data Complexity&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Adoption rates of graph data-bases continue to increase, with telecom, financial services, and web/ISV-firms driving the bulk of growth.  This is primarily due to the evolution of data and data connectedness (Note: coming from a relational database model, you can think of connectedness as a data-model with lots of joins).  Although graph databases and graph modeling can seem intimidating, it's actually a very natural way to model the real-world.&lt;/p&gt;
-
-&lt;p&gt;For example, compare the complexity of answering the below questions in their respective domains in a relational DB versus a graph DB.&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-&lt;li&gt;Subway or Transit Systems: "How do I get from point A to point B?"&lt;/li&gt;
-
-&lt;li&gt;Data-Centers or Networks: "If switch X goes down, what systems are impacted?"&lt;/li&gt;
-
-&lt;li&gt;Recommendation Engines: "What did customers who bought this product also buy?"&lt;/li&gt;
-
-&lt;li&gt;Social Networks: "How many of my friends know person X?"&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These can certainly be modeled in a relational world, and the questions answered using appropriate algorithms but all of that extra work becomes unnecessary if you use a graph DB instead.  Adoption rates seem to indicate this assessment is correct, especially in products where determining correlations and causality is a key feature. &lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Graph DBs, Features and Benefits&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;In addition to being intuitive and natural to model, graph DBs also provide the advantage of providing constant query times even as the data-set grows.  That is, you are only paying the traversal of nodes (compare to outer joining on a large table).  Additionally, since graph DBs are have non-rigid structures, it is easier to evolve the structure of a graph DB when compared to a relational DB.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Querying a Graph DB&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;A graph consists of nodes (entities) and vertices (lines to other nodes).  Each of these vertices can be labeled with a relationship descriptor.  Additionally, each node can have N number of properties.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://www.neo4j.org/learn/cypher" target="_blank"&gt;Cypher&lt;/a&gt; is the language Neo4j provides to describe and query the graph. Cypher queries can provide the engine the following data:&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-&lt;li&gt;A starting node&lt;/li&gt;
-
-&lt;li&gt;What relationships to traverse&lt;/li&gt;
-
-&lt;li&gt;What data to return&lt;/li&gt;
-
-&lt;li&gt;What property values to match&lt;/li&gt;
-
-&lt;li&gt;How to order the data&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;span class="byline"&gt;Designing and Building a Graph Database Application&lt;/span&gt;
-&lt;em&gt;Ian Robinson / &lt;a target="_blank" href="http://vimeo.com/76710631"&gt;Presentation (Video)&lt;/a&gt; / &lt;a target="_blank" href="http://iansrobinson.com/"&gt;Blog&lt;/a&gt; / &lt;a target="_blank" href="https://github.com/iansrobinson"&gt;GitHub&lt;/a&gt; / &lt;a target="_blank"  href="https://twitter.com/iansrobinson"&gt;@IansRobinson&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Not unlike the relational world, it's critical to model data correctly when building an application that is backed by a graph DB.  It's helpful to know the questions you are going to ask of your data when you are building your data-model.&lt;/p&gt;
-
-&lt;p&gt;Given a system that is used for knowledge management and exploring one's professional social network, a typical question asked of the system might be &amp;#34;Which people who work for the same company have the same skills as I do?&amp;#34;&lt;/p&gt;
-
-&lt;p&gt;Start by:&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-&lt;li&gt;Identifying entities (People, Companies, Skills)&lt;/li&gt;
-
-&lt;li&gt;Identifying relationships (A person WORKS_FOR a company, a person HAS_SKILL)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Convert these relationships and entities into cypher, and examine how easy (or difficult) it is to answer your sample question(s).  It may also be helpful to create a sample graph and ask the question(s) with the graph model in front of you (See slide 14).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Testing&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Tests should be similar to tests that you'd have in an application with a relational store.  In addition, you should be able to test that your data model is sufficient/adequate, as well as be able to ensure the queries you designed return the correct data.  Of course, these tests also serve the purpose of documentation and act as regression tests.&lt;/p&gt;
-
-&lt;p&gt;In Java, there is an entirely in-memory version of Neo4j that should only be used for testing.  This engine can be injected via dependency injection (as you would do with other dependencies). In doing so, you should also include a small, static data-set.  This should provide you the ability to easily execute your queries with full knowledge of what the correct response should be.  The exact strategy (how this gets injected, etc.) will depend on your architecture.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Neo4j Application/Platform Choices&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Neo4j has 3 options as far as how it can be installed/leveraged.&lt;/p&gt;
-
-&lt;ol class="style1"&gt;
-&lt;li&gt;Embedded&lt;/li&gt;
-
-&lt;ul class="style1"&gt; 
-    &lt;li&gt;Hosted in a Java process&lt;/li&gt;
-
-    &lt;li&gt;Provides native access to the Neo4j Java API&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;li&gt;Server&lt;/li&gt;
-
-&lt;ul class="style1"&gt;
-    &lt;li&gt;Wraps the embedded instance&lt;/li&gt;
-
-    &lt;li&gt;Provides a JSON REST interface&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;li&gt;Server with Extensions&lt;/li&gt;
-
-
-&lt;ul class="style1"&gt;
-    &lt;li&gt;Provides a way to execute custom [Java] code on the server&lt;/li&gt;
-
-    &lt;li&gt;Provides you with a hook to control the HTTP request and response format&lt;/li&gt;
-
-    &lt;li&gt;Basically, provides a hook where into the HTTP pipeline (if you request &amp;#34;/get_skills/&amp;#34; handle it like this...)&lt;/li&gt;
-
-&lt;/ul&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;There are specific code examples for writing unit tests of embedded code as well as Server Extensions starting at slide 30 of Ian's presentation.&lt;/p&gt;
-
-&lt;p&gt;&lt;span class="byline"&gt;How Marvel Comics Uses Graph Databases&lt;/span&gt;
-&lt;em&gt;Peter Olson / &lt;a target="_blank" href="https://twitter.com/iansrobinson"&gt;Presentation (Video)&lt;/a&gt; / &lt;a target="_blank" href="https://twitter.com/Dethtron5000"&gt;@Dethtron5000&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Marvel has a significant inventory of stories, sprawling storylines, authors, and characters.  Additionally, stories from the marvel Universe don't obey the rules that we are likely used to modeling.  For example, characters can have a property for attribute for a very limited time, die and come back to life, exist in multiple places at once...there are basically no rules, whatsoever.  This would be a relational modeling nightmare.&lt;/p&gt;
-
-&lt;p&gt;Graph DBs are being used to solve a number of challenges associated with this universe.  For example, given this scenario: &amp;#34;A character is a superhero at a time T, which occurs in issue I.  This character is also related to an overarching theme in the Marvel history, and is part of a team.&amp;#34;&lt;/p&gt;
-
-&lt;p&gt;&lt;span class="byline"&gt;Creating Interactive Graph Visualizations&lt;/span&gt;
-&lt;em&gt;Corey Lanum / &lt;a target="_blank" href="http://watch.neo4j.org/video/64827612"&gt;Presentation (Video)&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The purpose of a visualization is to provide the user with a better understanding of the structure and relationships of the data. &lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;    Visualizing Nodes: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-    &lt;li&gt;Use images and icons (as opposed to just circles with words in them)&lt;/li&gt;
-
-    &lt;li&gt;Use colors and/or gradients (gradients can be useful in expressing a numeric value, but don't get too fancy or combine colors and expect the user to know what you are expressing)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Visualizing Vertices: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-    &lt;li&gt;Use colors to indicate categories of relationships&lt;/li&gt;
-
-    &lt;li&gt;Use width to indicate strength of a connection&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Interactivity with the Graph: Dos and Don'ts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-    &lt;li&gt;It is important to allow the user to easily add and remove filters&lt;/li&gt;
-
-    &lt;li&gt;Provide an easy way to combine qualities and aggregate them under a node&lt;/li&gt;
-
-    &lt;li&gt;Animation: If you are going to animate, make sure you do it in a way that does not cause the user to lose track of individual nodes (Note, out of the box D3 does not smoothly animate)&lt;/li&gt;
-
-    &lt;li&gt;Layout: Don't force the user into the layout you think is best for the data.  The user might be looking for something you were not looking for when you designed the application.  Provide multiple layouts for the same data-set.&lt;/li&gt;
-
-    &lt;li&gt;Explore: One of the biggest advantages of graph DBs is the ability to discover correlations and causality you did not intend n finding.  It is important you design visualizations with this in mind.  This also means you don't need to show all the data you have at once, because it may not all be relevant.  You can work around this by aggregating data under a node (think, "click to expand").  Aggregations can be done by grouping on common node properties, for example.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Visual Dangers&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-    &lt;li&gt;Uniqueness:  Not every relationship is useful (Why do all nodes tie back to one node? This can cause a lot of noise on a graph visualization and provides little to no value most of the time)&lt;/li&gt;
-
-    &lt;li&gt;Structural Rigidity:  Don't assume that how you store your data is how users want to analyze/explore/think about the data.&lt;/li&gt;
-
-    &lt;li&gt;Don't overwhelm the user with data&lt;/li&gt;
-
-    &lt;li&gt;Don't try and be too clever. Make everything intuitive.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Common Mistakes&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul class="style1"&gt;
-    &lt;li&gt;Using 3D (causes occlusion problems, is hard to navigate, hard to print)&lt;/li&gt;
-
-    &lt;li&gt;Bad color choices&lt;/li&gt;
-
-    &lt;li&gt;No labels (What does this vertex actually mean?)&lt;/li&gt;
-
-    &lt;li&gt;No legend&lt;/li&gt;
-
-    &lt;li&gt;No tooltips on hover&lt;/li&gt;
-
-    &lt;li&gt;Complexity (Not providing filtering)&lt;/li&gt;
-
-    &lt;li&gt;No emphasis on important nodes&lt;/li&gt;
-
-    &lt;li&gt;Black backgrounds&lt;/li&gt;
-
-    &lt;li&gt;Bad navigation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;span class="byline"&gt;Natural Language Search with Neo4j&lt;/span&gt;
-&lt;em&gt;Kenny Bastani / &lt;a target="_blank" href="http://www.slideshare.net/KennyBastani/natural-language-search-using-neo4j"&gt;Presentation (Slides)&lt;/a&gt; / &lt;a target="_blank" href="https://github.com/kbastani"&gt;GitHub&lt;/a&gt; / &lt;a target="_blank" href="https://twitter.com/kennybastani"&gt;@KennyBastani&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;In terms of a graph DB, you can search by simply traversing paths, matching all of the paths that are &amp;#34;matches&amp;#34; (based on any criteria), and returning the matches.  Note, unlike a relational store, you are only paying the cost of the traversal (number of total nodes has little to no impact).&lt;/p&gt;
-
-&lt;p&gt;It is also possible (and useful) to model time in a graph DB.  Rather than modeling specific times and dates, Kenny explains that depending ont eh task at hand, it might be easier to model moments or snapshots in time.  See &lt;a href="http://gist.neo4j.org/?github-kbastani%2Fgists%2F%2Fmeta%2FTimeScaleEventMetaModel.adoc" target="_blank"&gt;this graph gist&lt;/a&gt; for more details, but essentially modeling&lt;/p&gt;
-
-&lt;blockquote&gt;
-    T0 &gt; T1 &gt; T2
-&lt;/blockquote&gt;
-
-&lt;p&gt;...is helpful in the context of natural language search (or search in general) because you can model out things like:&lt;/p&gt;
-
-&lt;blockquote&gt;
-At T0, Pam viewed Product X.  At T1, Pam viewed Product Y.  At T2, Pam purchased product X.
-&lt;/blockquote&gt;
-
-&lt;p&gt;With a larger sample set, it is possible to make useful deductions on this data.  For example, suggesting people who are viewing product Y to take a look at Product X.  Kenny suggests storing all these path traversals in non-real time, storing them in a JSON-friendly store, and then at runtime, extracting the relevant traversals based on some action (e.g., &lt;em&gt;Viewing product Y&lt;/em&gt;).  Note, Extrapolating path traversals can be compute intensive, you may want to distribute &amp;amp; map-reduce&lt;/p&gt;
 </description><pubDate>Fri, 15 Nov 2013 05:00:00 Z</pubDate><a10:updated>2013-11-15T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;Last week I attended the NYC Neo4j Meetup on Data Modeling &amp;amp; Natural Language Search, even better, I happened to win tickets to GraphConnect NYC which was just a few days later.  I decided to compile some notes from the event, but rather than just bullet-pointing out the content, I decided to compile a brief synopsis of each of the forums I attended so you know which slides to review or video to check out first.  This should be a pretty decent place to start if you're just looking to get your bearings when it comes to Graph DBs and Neo4j.  There are also a bunch of videos available at &lt;a href="http://watch.neo4j.org/" target="_blank"&gt;http://watch.neo4j.org/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
 
 &lt;hr/&gt;
 
@@ -414,14 +286,11 @@ At T0, Pam viewed Product X.  At T1, Pam viewed Product Y.  At T2, Pam purchased
 
 &lt;p&gt;Well...I finally got around to tweaking my blog, and in theory that will mean I actually get to writing a bit more.  This instance of my blog is running on &lt;a href="https://github.com/Sandra/Sandra.Snow/" target="_blank"&gt;Sandra Snow&lt;/a&gt;.  It's basically a port of &lt;a href="https://github.com/mojombo/jekyll" target="_blank"&gt;Jekyll&lt;/a&gt; with some additional features, and of course running on .NET (&lt;a href="https://github.com/NancyFx/Nancy" target="_blank"&gt;NancyFx&lt;/a&gt;) rather than Ruby.  The way both of these work is pretty much the same..&lt;/p&gt;
 
-&lt;p&gt;Create a mark-down files --&gt; Run Sandra.Snow --&gt; Get HTML pages --&gt; Push to GitHub&lt;/p&gt;
-
-&lt;p&gt;A mark-down file is really just a text file with some basic keywords (you can find more info on the specifics &lt;a href="https://github.com/Sandra/Sandra.Snow/wiki/Markdown-File-Header" target="_blank"&gt;here&lt;/a&gt;).  Sandra.Snow basically reads these in, parses to appy the some rules (paging, etc.), and then spits out some pretty HTML which I push to GitHub (hello, entirely free hosting).  This all means that when you hit my blog, you are hitting purely static HTML; zero database calls (well, unless GitHub is doing some).&lt;/p&gt;
-
-&lt;p&gt;Thanks to &lt;a href="https://twitter.com/philliphaydon" target="_blank"&gt;@PhillipHaydon&lt;/a&gt; and &lt;a href="https://twitter.com/jchannon" target="_blank"&gt;@jchannon&lt;/a&gt; for their work on putting this together.  &lt;/p&gt;
 </description><pubDate>Fri, 15 Nov 2013 05:00:00 Z</pubDate><a10:updated>2013-11-15T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;&lt;span class="byline"&gt;New Domain, New Platform, New Host&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Well...I finally got around to tweaking my blog, and in theory that will mean I actually get to writing a bit more.  This instance of my blog is running on &lt;a href="https://github.com/Sandra/Sandra.Snow/" target="_blank"&gt;Sandra Snow&lt;/a&gt;.  It's basically a port of &lt;a href="https://github.com/mojombo/jekyll" target="_blank"&gt;Jekyll&lt;/a&gt; with some additional features, and of course running on .NET (&lt;a href="https://github.com/NancyFx/Nancy" target="_blank"&gt;NancyFx&lt;/a&gt;) rather than Ruby.  The way both of these work is pretty much the same..&lt;/p&gt;
+
+&lt;!--excerpt--&gt;
 
 &lt;p&gt;Create a mark-down files --&gt; Run Sandra.Snow --&gt; Get HTML pages --&gt; Push to GitHub&lt;/p&gt;
 

@@ -805,3 +805,32 @@
 			box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.075), 0px 1px 0px 0px rgba(255,255,255,0.075);
 			display: block;
 		}
+
+/*********************************************************************************/
+/* Figure/Caption
+/*********************************************************************************/
+
+#container {
+    text-align: center;
+}
+a, figure {
+    display: inline-block;
+}
+figcaption {
+    margin: 2px 0 0 0;
+    font-variant: small-caps;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    color: #bb3333;
+    padding-left: 20px;
+}
+figure {
+    padding: 5px;
+}
+img {
+    transition: transform 0.2s;
+    -webkit-transition: -webkit-transform 0.2s;
+    -moz-transition: -moz-transform 0.2s;
+    -o-transition: -o-transform 0.2s;
+    border:1px solid #021a40;
+}
