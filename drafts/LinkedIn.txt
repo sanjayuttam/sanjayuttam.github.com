@@ -1,0 +1,52 @@
+Most of the time when I'm talking to other technology professionals about LinkedIn, they get pissed off and go into some rant related to LinkedIn being primarily a communication channel for receiving recruiter spam so let's get this out of the way first. You're going to get spammed at least a little.  But...
+
+- You can probably spot these kinds of messages from a mile away
+- You don't have to respond to these!
+- Are you the only person in the world that is not getting spam from every other direction already?
+- These tips will hopefully reduce the signal-to-noise ratio if you are already on LinkedIn
+
+Moving on then, as with most things you are going to get out of it what you put in.  The tips below are techniques I have used to optimized for getting individuals to look at my profile, and hopefully connect.  Why?  Simple really - most of the time when you're in LinkedIn and you're looking at any kind of results, they are ordered by network distance from you (e.g, they are your connections, your connection's connections, etc.).  You want to be in other peoples results- that means you want to be networked with as many people as you can, and it's better for everyone if they are in related industries and in your general physical location.  This way, you'll be in more results for more searches that are being conducted.  That brings to me to next point.  This is most certainly over simplified, but there are a few different profiles of individuals that are recruiting for jobs.
+
+- Third-Party Agencies:  When people think of recruiters as annoying, they're probably thinking of these guys.  Third-party recruiters make a cut off your placement (how it's structured varies depending on the company, role, and other factors).  This doesn't make them evil, though, there are plenty of third-party recruiters that are trying to fill roles that are cool.  Some of them just suck at it, but doesn't that apply to any profession really?
+
+- In-house Recruiters:  These recruiters work for the company that they are trying to fill a job at.  You're probably a lot less likely to get spammed from these guys since they likely have multiple channels of getting candidates in their pipeline.  These other channels might be public career websites that, over time, collect thousands of resumes that they can draw on at any time.  Guess what else?  These guys frequently use third-party recruiters as a time saver, or simply to augment staff temporarily (remember what I said about third-party recruiters having roles that are cool?).
+
+- Hiring Managers:  Sometimes hiring managers poke around LinkedIn themselves.  This isn't that rare, especially when it comes to small to mid-size companies.  I've definitely been contacted by multiple CTOs via LinkedIn.
+
+So why should you care about any of that?  You can use LinkedIn to your advantage if you do it right.  
+
+Tips
+
+- Have a reasonably complete profile
+
+If you've got a profile that literally gives no information other than the fact that you are a developer, you better believe you're going to get spammed *more* by recruiters that are working for recruiting agencies.  Your profile doesn't allude to any specific skills, and for them the amount of work to copy and paste some garbage into an InMail really has zero downside - it's basically skills-phishing. 
+
+Also, have a photo.  It is preferable to have a real one, but you want something just so you are more memorable and recognizable in search results.
+
+- Create an e-mail address specifically for LinkedIn.  Post it somewhere visible in your profile so that individuals that are not connected to you can connect or contact you.
+
+I recommend something like FirstName.LastName.LinkedIn@Gmail.com...this does a few things for you:
+	- Whenever you get mail that is not LinkedIn related to this address, you know that it's spam.  Add it to your spam filter, and that's the end of that.
+	- By default, LinkedIn doesn't let users that aren't connected to you message you (you might get a few free InMails or something but it's very limited if you're a free user).  By providing an e-mail address, we're giving people a way to contact us if they want, or connect with us.  I've been doing this since around 2006 - I don't have any kind of spam issues (I use GMail).  We want to encourage individuals to connect with us, and we want to make that easy for them.
+	
+Allow others to see when you view their profile
+
+This might seem counter-intuitive at first but it's actually pretty simple reasoning.  We want other people to see when you view their profile because that will hopefully prompt them to view your profile, and...you guessed it, connect with us!  This is all about surface area.  But that isn't' even the best part.
+You can use this to your advantage based on who you visit.  Let's say I have a completed profile.  Let's also say that I am really interested in a job at Microsoft's NYC Office.  I should conduct searches and find *technical recruiters at Microsoft NYC*.  They are going to check who has viewed their profile.  That will give them at least an opportunity to click on your profile.  Hopefully, your profile looks interesting enough for them do one of the following:
+	
+	- Connect with you
+	- Connect with you and message you about an opportunity
+	- E-mail you at the address we created specifically for LinkedIn, since it is on your profile
+
+Even connecting with you is great, because we're now that much more likely to be in the result list for their searches, and searches of the individuals they are connected with.
+
+This setting can be changed by going to:
+Clicking on the top right icon of your image (if you've got one) >
+Privacy and Settings >
+Select what others see when you've viewed their profile
+
+Update Frequently 
+
+Update your profile as you think of new skills, complete more projects, and certainly get a new job.
+While I could not empirically explain the importance of this, some non-trivial portion of the results ranking is based on the last time you have updated your profile.  Try it for yourself, update something minor on your profile everyday this week and see if you get more messages (You're going to want a reasonably completed profile, of course).
+
