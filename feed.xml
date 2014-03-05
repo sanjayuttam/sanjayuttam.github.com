@@ -1,4 +1,131 @@
-<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sanjay Uttam's Blog</title><link>http://www.sanjay.io/feed.xml</link><description>Sanjay Uttam's Blog</description><item><guid isPermaLink="false">http://www.Sanjay.io/2014/01/the-hackers-guide-to-linkedin/</guid><link>http://www.sanjay.io/2014/01/the-hackers-guide-to-linkedin/</link><title>The Hackers Guide to LinkedIn</title><description>&lt;p&gt;Most of the time when I'm talking to other technology professionals about LinkedIn, they get pissed off and go into some rant related to LinkedIn being primarily a communication channel for receiving recruiter spam so let's get this out of the way first. You're going to get spammed at least a little.  But...&lt;/p&gt;
+<rss xmlns:a10="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Sanjay Uttam's Blog</title><link>http://www.sanjay.io/feed.xml</link><description>Sanjay Uttam's Blog</description><item><guid isPermaLink="false">http://www.Sanjay.io/2014/03/unit-tests-taking-it-too-far/</guid><link>http://www.sanjay.io/2014/03/unit-tests-taking-it-too-far/</link><title>Taking it Too Far?  Unit Testing Your Data Access Code</title><description>&lt;p&gt;Typically, unit testing your data-access class follows a pretty vanilla pattern.  If you're using the repository pattern, for example, it's going to look something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface ICustomerRepository {
+    Customer Get(int id);
+}
+public class CustomerRepository: ICustomerRepository {
+    public Customer Get(int id) {}
+}
+
+[TestMethod()]
+public void Test_Customer_Repository_Returns_Customer_When_Passed_Valid_Id()
+{
+    //setup
+    var mockICustomerRepo = new Mock&amp;lt;ICustomerRepository&amp;gt;();
+    var customerRepo = new CustomerRepository(mockICustomerRepo.Object);
+    mockICustomerRepo.Setup(c =&amp;gt; c.Get(1))
+        .Returns(new Customer{ Id = 1, FirstName = "Sanjay", LastName = "Uttam"}.Verifiable();
+    var result = customerRepo.Get(1);
+    //assert some stuff
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That's all fine and well, and it may sufficient in certain applications.  But what happens when you want to test whether your repository methods populate objects correctly?  Perhaps you've got one or two queries that are still using stored-procedures for performance or legacy reasons.  In that case, the above test is really evaluating the correctness of your Get method in the Customer class on the assumption that at run-time, the stored-procedure or query returns the correct data.  &lt;/p&gt;
+
+</description><pubDate>Wed, 05 Mar 2014 05:00:00 Z</pubDate><a10:updated>2014-03-05T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;Typically, unit testing your data-access class follows a pretty vanilla pattern.  If you're using the repository pattern, for example, it's going to look something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface ICustomerRepository {
+    Customer Get(int id);
+}
+public class CustomerRepository: ICustomerRepository {
+    public Customer Get(int id) {}
+}
+
+[TestMethod()]
+public void Test_Customer_Repository_Returns_Customer_When_Passed_Valid_Id()
+{
+    //setup
+    var mockICustomerRepo = new Mock&amp;lt;ICustomerRepository&amp;gt;();
+    var customerRepo = new CustomerRepository(mockICustomerRepo.Object);
+    mockICustomerRepo.Setup(c =&amp;gt; c.Get(1))
+        .Returns(new Customer{ Id = 1, FirstName = "Sanjay", LastName = "Uttam"}.Verifiable();
+    var result = customerRepo.Get(1);
+    //assert some stuff
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That's all fine and well, and it may sufficient in certain applications.  But what happens when you want to test whether your repository methods populate objects correctly?  Perhaps you've got one or two queries that are still using stored-procedures for performance or legacy reasons.  In that case, the above test is really evaluating the correctness of your Get method in the Customer class on the assumption that at run-time, the stored-procedure or query returns the correct data.  &lt;/p&gt;
+
+&lt;!--excerpt--&gt;
+
+&lt;p&gt;A simple contrived example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//Customer Class
+public class Customer{
+    public int Id {get; set;}
+    public string FirstName {get; set;}
+    public string LastName {get; set;}
+    public DateTime DateOfBirth {get; set;}
+}
+
+//Your DB query or stored-procedure contents
+SELECT Id, FirstName, LastName FROM Customer WHERE Id = @Id
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example, our query is missing the DateOfBirth column.  That's an easy omission to make, especially if the column is new in the Customer table.  There is at least one major issue with this besides Customer.DateOfBirth not being populated.  Your unit test doesn't actually verify that the correct data is returned, because the unit test returns an object that hasn't been created from the database engine.  It's something easy to fix in this example, but I've worked on systems in the past where the most critical logic in the application was a stored procedure that pulled logs of what a user has consumed (including quantity, calories, serving size, etc.).  The stored-procedure was highly efficient when compared to working with an ORM, but at the cost of complexity.  It did all sorts of fun stuff, including PIVOTs, CTEs, and running some basic calculations.  It's easy to miss making changes in that type of scenario, but you can work around that.&lt;/p&gt;
+
+&lt;p&gt;One approach to this is using an in-memory database at test-time to actually run the queries you need to run and ensure that it does in-fact provide the desired result.  Here is the basic sequence of steps we need to take:&lt;/p&gt;
+
+&lt;p&gt;1 - In our unit-test class' set-up event, create a SqlLite instance, create all objects, and insert all relevant data&lt;/p&gt;
+
+&lt;p&gt;2 - Run the repository class methods you need to test.  You'll need to create a mechanism for injecting a database engine instance into your actual repository class, so you can provide an instance of SqlLite rather than SqlServer (or whatever you're using at runtime).  &lt;/p&gt;
+
+&lt;p&gt;3 - In your unit test class' tear down event, destroy the database you created.&lt;/p&gt;
+
+&lt;p&gt;There is a full link to the source below, but here's a snippet of the important bits.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    [TestClass]
+    public class CustomerRepositoryTests
+    {
+        public Container Container { get; set; }
+        public IDbConnectionFactory DbFactory { get; set; }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            Container = new Container();
+            Container.Register&amp;lt;IDbConnectionFactory&amp;gt;(
+                new OrmLiteConnectionFactory(":memory:", false, SqliteDialect.Provider));
+            DbFactory = Container.Resolve&amp;lt;IDbConnectionFactory&amp;gt;();
+
+            using (var db = DbFactory.Open())
+            {
+                db.CreateTable&amp;lt;Customer&amp;gt;(overwrite: true);
+                db.Insert(new Customer
+                {
+                    FirstName = "Sanjay",
+                    LastName = "Uttam"
+                });
+            }
+        }
+
+        [TestMethod]
+        public void Test_Get_Customer_By_Id()
+        {
+            var result = new CustomerRepository(DbFactory).Get(1);
+            Assert.AreEqual(1, result);
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Not surprisingly, this might be overkill for you, but hey, as with anything else, it depends.  There are a couple of pros and cons that come to mind immediately.  &lt;/p&gt;
+
+&lt;p&gt;You can find a &lt;a href="https://github.com/sanjayuttam/Sanjay.Io.UnitTestingRepositories"&gt;demo&lt;/a&gt; on GitHub.  Note, my demo uses ServiceStack 3.9.71, but this approach doesn't require you to.&lt;/p&gt;
+
+&lt;h2&gt;Pros&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Opportunity to test actual data-access logic.  This is likely only equitable in terms of time/value when data-access code is complex and/or external (e.g., stored procedure) or when there data-specific conditions that you must verify are treated correctly.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Ability to create certain data-related conditions and ensure data-access acts in the desired manner&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Cons&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Objects and data must be accurately created at set-up and tear-down (There might be a way to create the in-memory database on the fly with some hacking, though)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;SqlLite query syntax will most likely not be a 1:1 with your actual database engine. &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</a10:content></item><item><guid isPermaLink="false">http://www.Sanjay.io/2014/01/the-hackers-guide-to-linkedin/</guid><link>http://www.sanjay.io/2014/01/the-hackers-guide-to-linkedin/</link><title>The Hackers Guide to LinkedIn</title><description>&lt;p&gt;Most of the time when I'm talking to other technology professionals about LinkedIn, they get pissed off and go into some rant related to LinkedIn being primarily a communication channel for receiving recruiter spam so let's get this out of the way first. You're going to get spammed at least a little.  But...&lt;/p&gt;
 
 </description><pubDate>Wed, 22 Jan 2014 05:00:00 Z</pubDate><a10:updated>2014-01-22T05:00:00Z</a10:updated><a10:content type="text">&lt;p&gt;Most of the time when I'm talking to other technology professionals about LinkedIn, they get pissed off and go into some rant related to LinkedIn being primarily a communication channel for receiving recruiter spam so let's get this out of the way first. You're going to get spammed at least a little.  But...&lt;/p&gt;
 

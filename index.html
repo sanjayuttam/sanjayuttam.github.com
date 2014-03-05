@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="last-modified" content="2014-03-03T21:22:18.8513206-05:00" />
-    <meta name="keywords" content="debugging,general,meetups,neo4j,rant,social media,tools,UX,visual studio 2012" />
+    <meta http-equiv="last-modified" content="2014-03-05T14:30:00.2980318-05:00" />
+    <meta name="keywords" content="debugging,general,meetups,neo4j,rant,social media,tools,unit testing,UX,visual studio 2012" />
     <title>sanjay.io</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
@@ -16,7 +16,7 @@
         <header id="masthead" class="site-header" role="banner">
             <hgroup>
                 <h1 class="site-title"><a href="/" title="Snow Byte" rel="home">Sanjay Uttam</a>
-                <p><small>Software Development, Design, and Architecture</small></p></h1>
+                <p><small>Boring You to Tears:  Software Development, Design, and Architecture</small></p></h1>
             </hgroup>
             <nav role="navigation" class="site-navigation main-navigation">
                 <h1 class="assistive-text">Menu</h1>
@@ -38,6 +38,43 @@
                   
 
   <ul class="posts">
+    <li class="post">
+      <h1><a href="/2014/03/unit-tests-taking-it-too-far/">Taking it Too Far?  Unit Testing Your Data Access Code</a></h1> 
+      <div class="meta">
+        <p class="posted">05 Mar 2014</p>
+        <ul class="categories">
+          <li><a href="/category/unit testing" title="unit testing">unit testing</a></li>
+        </ul>
+      </div>
+      
+      <p>Typically, unit testing your data-access class follows a pretty vanilla pattern.  If you're using the repository pattern, for example, it's going to look something like:</p>
+
+<pre><code>public interface ICustomerRepository {
+    Customer Get(int id);
+}
+public class CustomerRepository: ICustomerRepository {
+    public Customer Get(int id) {}
+}
+
+[TestMethod()]
+public void Test_Customer_Repository_Returns_Customer_When_Passed_Valid_Id()
+{
+    //setup
+    var mockICustomerRepo = new Mock&lt;ICustomerRepository&gt;();
+    var customerRepo = new CustomerRepository(mockICustomerRepo.Object);
+    mockICustomerRepo.Setup(c =&gt; c.Get(1))
+        .Returns(new Customer{ Id = 1, FirstName = "Sanjay", LastName = "Uttam"}.Verifiable();
+    var result = customerRepo.Get(1);
+    //assert some stuff
+}
+</code></pre>
+
+<p>That's all fine and well, and it may sufficient in certain applications.  But what happens when you want to test whether your repository methods populate objects correctly?  Perhaps you've got one or two queries that are still using stored-procedures for performance or legacy reasons.  In that case, the above test is really evaluating the correctness of your Get method in the Customer class on the assumption that at run-time, the stored-procedure or query returns the correct data.  </p>
+
+
+      <p><a href="/2014/03/unit-tests-taking-it-too-far/">Read more...</a></p>
+    </li>
+    <hr/>
     <li class="post">
       <h1><a href="/2014/01/the-hackers-guide-to-linkedin/">The Hackers Guide to LinkedIn</a></h1> 
       <div class="meta">
