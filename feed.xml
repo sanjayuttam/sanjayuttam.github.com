@@ -103,7 +103,7 @@ SELECT Id, FirstName, LastName FROM Customer WHERE Id = @Id
         public void Test_Get_Customer_By_Id()
         {
             var result = new CustomerRepository(DbFactory).Get(1);
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, result.Id);
         }
     }
 &lt;/code&gt;&lt;/pre&gt;
